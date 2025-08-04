@@ -2,6 +2,7 @@
 #define SHAPE
 
 #include <string> 
+#include <vector>
 
 class Shape {
     private:
@@ -14,6 +15,7 @@ class Shape {
         Shape(int x, int y, int l, int w, std::string);
         virtual std::string shapeType() = 0;
         virtual Shape* clone() = 0;
+        std::vector<int> getCoords();
 };
 
 #endif 

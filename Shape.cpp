@@ -7,3 +7,8 @@ Shape::Shape(int x, int y, int l, int w, std::string colour) {
     this->width = w;
     this->colour = colour;
 }
+
+std::vector<int> Shape::getCoords() {
+    std::vector<int> coords = {position_x, position_y};
+    return coords;
+}

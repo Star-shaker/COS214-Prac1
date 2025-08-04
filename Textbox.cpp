@@ -10,3 +10,7 @@ Shape* Textbox::clone() {
 std::string Textbox::shapeType() {
     return "Textbox";
 }
+
+std::string Textbox::getText() {
+    return this->text;
+}
