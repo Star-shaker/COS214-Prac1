@@ -10,6 +10,6 @@ class Caretaker {
     public:
         void storeMemento(Memento*);
         Memento* retrieveMemento(); 
-}
+};
 
 #endif
