@@ -1,6 +1,6 @@
 #include "ExportCanvas.h"
 
-void ExportCanvas::_export(Canvas* canvas)
+void ExportCanvas::exportToFile(Canvas* canvas)
 {
     this->canvas = canvas;
     prepareCanvas();

@@ -12,7 +12,7 @@ class ExportCanvas : public Canvas
     
     public:
         virtual ~ExportCanvas();
-        void _export(Canvas* canvas); //Template method
+        void exportToFile(Canvas* canvas); //Template method
 };
 
 #endif
