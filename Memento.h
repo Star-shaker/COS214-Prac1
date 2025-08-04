@@ -10,6 +10,6 @@ class Memento {
     public:
         Memento(std::vector<Shape*>& elements);
         std::vector<Shape*> getState();
-}
+};
 
 #endif
