@@ -6,6 +6,44 @@ using namespace std;
 
 Shape* RectangleFactory::createShape()
 {
+    string input_l;
+    bool l_valid = false;
+    int l;
+    while (l_valid)
+    {
+        cout << "Enter the length: ";
+        cin >> input_l;
+
+        try
+        {
+            l = stoi(input_l);
+            l_valid = true;
+        }
+        catch(const exception& e)
+        {
+            cout << "Not a valid integer. Please try again." << endl;
+        }
+    }
+
+    string input_w;
+    bool w_valid = false;
+    int w;
+    while (w_valid)
+    {
+        cout << "Enter the width: ";
+        cin >> input_w;
+
+        try
+        {
+            w = stoi(input_l);
+            w_valid = true;
+        }
+        catch(const exception& e)
+        {
+            cout << "Not a valid integer. Please try again." << endl;
+        }
+    }
+
     string input_x;
     bool x_valid = false;
     int x;
@@ -72,10 +110,15 @@ Shape* RectangleFactory::createShape()
 
     }
 
-    Shape* newRectangle = new Rectangle(x, y, input_colour);
+    Shape* newRectangle = new Rectangle(l, w, input_colour, x, y);
 }
 
 void RectangleFactory::toString()
 {
     cout << "Rectangle created!" << endl;
+}
+
+RectangleFactory::~RectangleFactory()
+{
+    // TODO: Memory management!
 }

@@ -6,6 +6,25 @@ using namespace std;
 
 Shape* SquareFactory::createShape()
 {
+    string input_s;
+    bool s_valid = false;
+    int s;
+    while (s_valid)
+    {
+        cout << "Enter the length: ";
+        cin >> input_s;
+
+        try
+        {
+            s = stoi(input_s);
+            s_valid = true;
+        }
+        catch(const exception& e)
+        {
+            cout << "Not a valid integer. Please try again." << endl;
+        }
+    }
+
     string input_x;
     bool x_valid = false;
     int x;
@@ -72,10 +91,15 @@ Shape* SquareFactory::createShape()
 
     }
 
-    Shape* newSquare = new Square(x, y, input_colour);
+    Shape* newSquare = new Square(s, input_colour, x, y);
 }
 
 void SquareFactory::toString()
 {
     cout << "Square created!" << endl;
+}
+
+SquareFactory::~SquareFactory()
+{
+    // TODO: Memory management!
 }
