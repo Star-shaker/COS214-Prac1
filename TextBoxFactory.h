@@ -8,7 +8,7 @@ class TextBoxFactory : public ShapeFactory
     public:
         Shape* createShape();
         void toString();
-        virtual ~TextBoxFactory() {};
+        virtual ~TextBoxFactory();
 };
 
 #endif

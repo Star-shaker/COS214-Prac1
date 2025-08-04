@@ -8,7 +8,7 @@ class RectangleFactory : public ShapeFactory
     public:
         Shape* createShape();
         void toString();
-        virtual ~RectangleFactory() {};
+        virtual ~RectangleFactory();
 };
 
 #endif

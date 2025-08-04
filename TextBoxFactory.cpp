@@ -6,6 +6,44 @@ using namespace std;
 
 Shape* TextBoxFactory::createShape()
 {
+    string input_l;
+    bool l_valid = false;
+    int l;
+    while (l_valid)
+    {
+        cout << "Enter the length: ";
+        cin >> input_l;
+
+        try
+        {
+            l = stoi(input_l);
+            l_valid = true;
+        }
+        catch(const exception& e)
+        {
+            cout << "Not a valid integer. Please try again." << endl;
+        }
+    }
+
+    string input_w;
+    bool w_valid = false;
+    int w;
+    while (w_valid)
+    {
+        cout << "Enter the length: ";
+        cin >> input_w;
+
+        try
+        {
+            w = stoi(input_w);
+            w_valid = true;
+        }
+        catch(const exception& e)
+        {
+            cout << "Not a valid integer. Please try again." << endl;
+        }
+    }
+
     string input_x;
     bool x_valid = false;
     int x;
@@ -75,10 +113,15 @@ Shape* TextBoxFactory::createShape()
     cout << "Enter the text: ";
     cin >> input_text;
 
-    Shape* newTextBox = new TextBox(x, y, input_colour, input_text);
+    Shape* newTextBox = new TextBox(l, w, input_colour, x, y, input_text);
 }
 
 void TextBoxFactory::toString()
 {
     cout << "TextBox created!" << endl;
+}
+
+TextBoxFactory::~TextBoxFactory()
+{
+    // TODO: Memory management!
 }
