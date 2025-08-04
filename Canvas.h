@@ -1,3 +1,6 @@
+#ifndef CANVAS
+#define CANVAS 
+
 #include "Shape.h"
 #include "Memento.h"
 #include "Caretaker.h"
@@ -13,4 +16,6 @@ class Canvas {
         void undoAction(Memento*);
         void drawShape();
         void cloneShape();
-}
+};
+
+#endif
