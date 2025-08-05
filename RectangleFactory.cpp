@@ -110,7 +110,7 @@ Shape* RectangleFactory::createShape()
 
     }
 
-    Shape* newRectangle = new Rectangle(l, w, input_colour, x, y);
+    Shape* newRectangle = new Rectangle(x, y, l, w, input_colour);
 }
 
 void RectangleFactory::toString()
