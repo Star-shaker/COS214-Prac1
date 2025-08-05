@@ -1,7 +1,7 @@
 #ifndef TEXTBOX
 #define TEXTBOX
 
-#include "Shape.h"
+#include "Shape/Shape.h"
 
 class Textbox: public Shape {
     private:

@@ -1,7 +1,7 @@
 #ifndef PDFExporter_H
 #define PDFExporter_H
 
-#include "ExportCanvas.h"
+#include "ExportCanvas/ExportCanvas.h"
 
 class PDFExporter : public ExportCanvas
 {

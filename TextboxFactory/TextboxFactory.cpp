@@ -1,10 +1,10 @@
-#include "TextBoxFactory.h"
+#include "TextboxFactory.h"
 
 #include <iostream>
 #include <string>
 using namespace std;
 
-Shape* TextBoxFactory::createShape()
+Shape* TextboxFactory::createShape()
 {
     string input_l;
     bool l_valid = false;
@@ -116,12 +116,12 @@ Shape* TextBoxFactory::createShape()
     Shape* newTextBox = new Textbox(x, y, l, w, input_colour, input_text);
 }
 
-void TextBoxFactory::toString()
+void TextboxFactory::toString()
 {
     cout << "TextBox created!" << endl;
 }
 
-TextBoxFactory::~TextBoxFactory()
+TextboxFactory::~TextboxFactory()
 {
     // TODO: Memory management!
 }

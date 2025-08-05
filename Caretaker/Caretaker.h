@@ -1,7 +1,7 @@
 #ifndef CARETAKER
 #define CARETAKER
 
-#include "Memento.h"
+#include "Memento/Memento.h"
 #include <list>
 
 class Caretaker {
@@ -9,7 +9,7 @@ class Caretaker {
         std::list<Memento*> canvasses;
     public:
         void storeMemento(Memento*);
-        Memento* retrieveMemento(); 
+        Memento retrieveMemento(); 
 };
 
 #endif
