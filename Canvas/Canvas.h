@@ -1,9 +1,9 @@
 #ifndef CANVAS
 #define CANVAS 
 
-#include "Shape.h"
-#include "Memento.h"
-#include "Caretaker.h"
+#include "Shape/Shape.h"
+#include "Memento/Memento.h"
+#include "Caretaker/Caretaker.h"
 
 #include <map>
 

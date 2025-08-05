@@ -1,7 +1,7 @@
 #ifndef ShapeFactory_H
 #define ShapeFactory_H
 
-#include "Shape.h"
+#include "Shape/Shape.h"
 
 class ShapeFactory : public Shape
 {

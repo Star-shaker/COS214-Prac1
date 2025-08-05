@@ -1,8 +1,8 @@
 #ifndef RectangleFactory_H
 #define RectangleFactory_H
 
-#include "ShapeFactory.h"
-#include "Rectangle.h"
+#include "ShapeFactory/ShapeFactory.h"
+#include "Rectangle/Rectangle.h"
 
 class RectangleFactory : public ShapeFactory
 {
