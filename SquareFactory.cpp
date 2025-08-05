@@ -91,7 +91,7 @@ Shape* SquareFactory::createShape()
 
     }
 
-    Shape* newSquare = new Square(s, input_colour, x, y);
+    Shape* newSquare = new Square(x, y, s, input_colour);
 }
 
 void SquareFactory::toString()

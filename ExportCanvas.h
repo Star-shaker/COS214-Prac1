@@ -1,6 +1,8 @@
 #ifndef ExportCanvas_H
 #define ExportCanvas_H
 
+#include "Canvas.h"
+
 class ExportCanvas : public Canvas
 {
     private:
