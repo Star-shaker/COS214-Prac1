@@ -1,3 +1,5 @@
+// ConcreteCreator (Factory Method)
+
 #ifndef RectangleFactory_H
 #define RectangleFactory_H
 

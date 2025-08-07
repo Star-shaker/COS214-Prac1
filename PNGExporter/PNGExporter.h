@@ -1,3 +1,5 @@
+// ConcreteClass (Template Method)
+
 #ifndef PNGExporter_H
 #define PNGExporter_H
 

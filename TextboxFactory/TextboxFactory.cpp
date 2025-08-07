@@ -113,7 +113,7 @@ Shape* TextboxFactory::createShape()
     cout << "Enter the text: ";
     cin >> input_text;
 
-    Shape* newTextBox = new Textbox(x, y, l, w, input_colour, input_text);
+    // Shape* newTextBox = new Textbox(x, y, l, w, input_colour, input_text);
 }
 
 void TextboxFactory::toString()

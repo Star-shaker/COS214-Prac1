@@ -1,3 +1,5 @@
+// ConcreteClass (Template Method)
+
 #ifndef PDFExporter_H
 #define PDFExporter_H
 

@@ -1,3 +1,5 @@
+// AbstractClass (Template Method)
+
 #ifndef ExportCanvas_H
 #define ExportCanvas_H
 

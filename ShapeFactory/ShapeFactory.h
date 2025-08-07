@@ -3,12 +3,16 @@
 
 #include "Shape/Shape.h"
 
-class ShapeFactory : public Shape
+class ShapeFactory
 {
     protected:
+        Shape* addShape();
         virtual Shape* createShape() = 0;
+        ShapeFactory(){};
         virtual ~ShapeFactory() {};
         virtual void toString() = 0;
 };
 
 #endif 
+
+// TODO: Maybe add a function so that the createShape() function is actually called

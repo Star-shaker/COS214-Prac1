@@ -1,3 +1,6 @@
+// Prototype (Prototype)
+// Product (Factory Method)
+
 #ifndef SHAPE
 #define SHAPE
 

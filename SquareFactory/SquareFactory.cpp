@@ -4,6 +4,11 @@
 #include <string>
 using namespace std;
 
+SquareFactory::SquareFactory() : ShapeFactory()
+{
+    cout << "SquareFactory created!\n";
+}
+
 Shape* SquareFactory::createShape()
 {
     string input_s;
@@ -92,6 +97,7 @@ Shape* SquareFactory::createShape()
     }
 
     Shape* newSquare = new Square(x, y, s, input_colour);
+    cout << "Square will be created!\n";
 }
 
 void SquareFactory::toString()

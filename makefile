@@ -1,0 +1,32 @@
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -I.
+
+SRC = main.cpp \
+	  OpenCanvas/OpenCanvas.cpp \
+	  Canvas/Canvas.cpp \
+	  Shape/Shape.cpp \
+	  SquareFactory/SquareFactory.cpp \
+	  RectangleFactory/RectangleFactory.cpp \
+	  TextboxFactory/TextboxFactory.cpp
+
+
+OBJ = $(SRC:.cpp=.o)
+
+TARGET = canvas_app
+
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+run: $(TARGET)
+	./$(TARGET)
+
+valgrind: $(TARGET)
+	valgrind ./$(TARGET)
+
+clean:
+	rm -f $(OBJ) $(TARGET)

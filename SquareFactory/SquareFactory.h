@@ -1,3 +1,5 @@
+// ConcreteCreator (Factory Method)
+
 #ifndef SquareFactory_H
 #define SquareFactory_H
 
@@ -7,9 +9,9 @@
 class SquareFactory : public ShapeFactory
 {
     public:
-        Shape* createShape();
         void toString();
         virtual ~SquareFactory();
+        SquareFactory();
 };
 
 #endif

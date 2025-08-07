@@ -1,3 +1,6 @@
+// ConcretePrototype (Prototype)
+// ConcreteProduct (Factory Method)
+
 #ifndef RECTANGLE
 #define RECTANGLE
 

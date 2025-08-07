@@ -1,3 +1,6 @@
+// ConcretePrototype (Prototype)
+// ConcreteProduct (Factory Method)
+
 #ifndef TEXTBOX
 #define TEXTBOX
 
