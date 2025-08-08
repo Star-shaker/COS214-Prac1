@@ -3,5 +3,5 @@
 Shape* ShapeFactory::anOperation()
 {
     shape = createShape();
-    cout << "Factory called:  " << shape->shapeType() << endl;
+    cout << "Factory called: " << shape->shapeType() << endl;
 }

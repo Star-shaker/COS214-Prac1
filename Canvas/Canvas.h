@@ -23,7 +23,7 @@ class Canvas
         std::vector<Shape*> shapes;
         
     public:
-        Canvas();
+        // Canvas();
         ~Canvas();
         std::map<int, Shape*> listShapes();
         // Memento* captureCurrent();
