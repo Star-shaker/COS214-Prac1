@@ -41,3 +41,14 @@ void Canvas::drawShape(string input)
         shapes.push_back(newShape);
     }
 }
+
+void Canvas::listShapes() {
+    if (shapes.empty()) {
+        std::cout << "There are no shapes yet\n";
+        return; 
+    }
+
+    for (int i = 0; i < shapes.size(); i++) {
+        std::cout << std::to_string(i) + ", " + shapes[i]->shapeType() + "\n";
+    }
+}

@@ -13,7 +13,6 @@
 // #include "Memento/Memento.h"
 // #include "Caretaker/Caretaker.h"
 
-#include <map>
 #include <string>
 using namespace std;
 
@@ -25,7 +24,7 @@ class Canvas
     public:
         Canvas();
         ~Canvas();
-        std::map<int, Shape*> listShapes();
+        void listShapes();
         // Memento* captureCurrent();
         // void undoAction(Memento*);
         void drawShape(string input);
