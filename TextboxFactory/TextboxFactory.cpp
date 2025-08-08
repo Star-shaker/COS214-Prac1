@@ -31,7 +31,7 @@ Shape* TextboxFactory::createShape()
     int w;
     while (!w_valid)
     {
-        cout << "Enter the length: ";
+        cout << "Enter the width: ";
         cin >> input_w;
 
         try
@@ -117,8 +117,9 @@ Shape* TextboxFactory::createShape()
     cout << "Enter the text: ";
     cin >> input_text;
 
-    Shape* newTextBox = new Textbox(x, y, l, w, input_colour, input_text);
-    cout << "Shape created: " << newTextBox->shapeType() << endl;
+    Shape* newTextbox = new Textbox(x, y, l, w, input_colour, input_text);
+    cout << "Shape created: " << newTextbox->shapeType() << endl;
+    return newTextbox;
 }
 
 void TextboxFactory::toString()

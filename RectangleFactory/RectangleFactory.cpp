@@ -114,6 +114,7 @@ Shape* RectangleFactory::createShape()
 
     Shape* newRectangle = new Rectangle(x, y, l, w, input_colour);
     cout << "Shape created: " << newRectangle->shapeType() << endl;
+    return newRectangle;
 }
 
 void RectangleFactory::toString()
