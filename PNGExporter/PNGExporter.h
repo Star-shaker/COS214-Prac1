@@ -5,6 +5,9 @@
 
 #include "ExportCanvas/ExportCanvas.h"
 
+#include <iostream>
+using namespace std;
+
 class PNGExporter : public ExportCanvas
 {
     private:

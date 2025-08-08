@@ -1,6 +1,7 @@
 #include "ShapeFactory.h"
 
-Shape* ShapeFactory::addShape()
+Shape* ShapeFactory::anOperation()
 {
-    createShape();
+    shape = createShape();
+    cout << "Factory called:  " << shape->shapeType() << endl;
 }

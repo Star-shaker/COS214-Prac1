@@ -2,8 +2,8 @@
 // Client (Prototype)
 // Originator (Memento)
 
-#ifndef CANVAS
-#define CANVAS 
+#ifndef CANVAS_H
+#define CANVAS_H
 
 #include "Shape/Shape.h"
 #include "SquareFactory/SquareFactory.h"
@@ -17,18 +17,19 @@
 #include <string>
 using namespace std;
 
-class Canvas {
+class Canvas 
+{
     private:
         std::vector<Shape*> shapes;
-        std::map<int, Shape*> listShapes();
+        
     public:
+        Canvas();
+        ~Canvas();
+        std::map<int, Shape*> listShapes();
         // Memento* captureCurrent();
         // void undoAction(Memento*);
         void drawShape(string input);
         void cloneShape();
-        Canvas(); // We should maybe add a constructor?
 };
 
 #endif
-
-// TODO: Maybe add a way to call the ShapeFactory so that the correct Shape is actually instantiated

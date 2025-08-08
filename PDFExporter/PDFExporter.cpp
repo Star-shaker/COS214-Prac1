@@ -1,7 +1,4 @@
 #include "PDFExporter.h"
-#include <iostream>
-
-using namespace std;
 
 void PDFExporter::saveToFile()
 {

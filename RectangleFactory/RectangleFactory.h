@@ -6,12 +6,18 @@
 #include "ShapeFactory/ShapeFactory.h"
 #include "Rectangle/Rectangle.h"
 
+#include <iostream>
+#include <string>
+using namespace std;
+
 class RectangleFactory : public ShapeFactory
 {
     public:
+        RectangleFactory();
+        virtual ~RectangleFactory();
+
         Shape* createShape();
         void toString();
-        virtual ~RectangleFactory();
 };
 
 #endif

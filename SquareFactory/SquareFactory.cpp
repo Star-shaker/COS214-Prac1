@@ -1,9 +1,5 @@
 #include "SquareFactory.h"
 
-#include <iostream>
-#include <string>
-using namespace std;
-
 SquareFactory::SquareFactory() : ShapeFactory()
 {
     cout << "SquareFactory created!\n";
@@ -14,7 +10,7 @@ Shape* SquareFactory::createShape()
     string input_s;
     bool s_valid = false;
     int s;
-    while (s_valid)
+    while (!s_valid)
     {
         cout << "Enter the length: ";
         cin >> input_s;
@@ -33,7 +29,7 @@ Shape* SquareFactory::createShape()
     string input_x;
     bool x_valid = false;
     int x;
-    while (x_valid)
+    while (!x_valid)
     {
         cout << "Enter the x-coordinate: ";
         cin >> input_x;
@@ -52,7 +48,7 @@ Shape* SquareFactory::createShape()
     string input_y;
     bool y_valid = false;
     int y;
-    while (y_valid)
+    while (!y_valid)
     {
         cout << "Enter the y-coordinate: ";
         cin >> input_y;
@@ -74,6 +70,8 @@ Shape* SquareFactory::createShape()
     {
         cout << "Enter the colour: ";
         cin >> input_colour;
+
+        colour_valid = true;
 
         if (input_colour.empty())
         {
@@ -97,7 +95,8 @@ Shape* SquareFactory::createShape()
     }
 
     Shape* newSquare = new Square(x, y, s, input_colour);
-    cout << "Square will be created!\n";
+    cout << "Shape created: " << newSquare->shapeType() << endl;
+    return newSquare;
 }
 
 void SquareFactory::toString()

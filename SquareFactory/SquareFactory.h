@@ -6,12 +6,18 @@
 #include "ShapeFactory/ShapeFactory.h"
 #include "Square/Square.h"
 
+#include <iostream>
+#include <string>
+using namespace std;
+
 class SquareFactory : public ShapeFactory
 {
     public:
-        void toString();
-        virtual ~SquareFactory();
         SquareFactory();
+        virtual ~SquareFactory();
+        
+        Shape* createShape();
+        void toString();
 };
 
 #endif

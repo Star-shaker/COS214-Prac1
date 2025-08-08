@@ -2,15 +2,22 @@
 #define ShapeFactory_H
 
 #include "Shape/Shape.h"
+#include <string>
+#include <iostream>
+using namespace std;
 
 class ShapeFactory
 {
+    private:
+        Shape* shape;
     protected:
-        Shape* addShape();
         virtual Shape* createShape() = 0;
+        virtual void toString() = 0;
+
+    public:
+        Shape* anOperation();
         ShapeFactory(){};
         virtual ~ShapeFactory() {};
-        virtual void toString() = 0;
 };
 
 #endif 

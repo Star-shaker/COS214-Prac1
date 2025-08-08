@@ -15,17 +15,29 @@ Canvas::Canvas()
 
 void Canvas::drawShape(string input)
 {
+    Shape* newShape = nullptr;
+
     if(input == "Square")
     {
         ShapeFactory* squareFactory = new SquareFactory();
-        Shape* newSquare = squareFactory->addShape();
+        newShape = squareFactory->anOperation();
+        delete squareFactory;
     }
     else if(input == "Rectangle")
     {
-
+        ShapeFactory* rectangleFactory = new RectangleFactory();
+        newShape = rectangleFactory->anOperation();
+        delete rectangleFactory;
     }
     else if(input == "Textbox")
     {
+        ShapeFactory* textboxFactory = new TextboxFactory();
+        newShape = textboxFactory->anOperation();
+        delete textboxFactory;
+    }
 
+    if(newShape)
+    {
+        shapes.push_back(newShape);
     }
 }

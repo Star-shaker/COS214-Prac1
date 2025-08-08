@@ -1,12 +1,13 @@
 // ConcretePrototype (Prototype)
 // ConcreteProduct (Factory Method)
 
-#ifndef SQUARE
-#define SQUARE
+#ifndef SQUARE_H
+#define SQUARE_H
 
 #include "Shape/Shape.h"
 
-class Square: public Shape {
+class Square: public Shape 
+{
     public:
         Square(int x, int y, int side, std::string colour);
         virtual Shape* clone();

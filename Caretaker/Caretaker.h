@@ -1,12 +1,15 @@
-#ifndef CARETAKER
-#define CARETAKER
+#ifndef CARETAKER_H
+#define CARETAKER_H
 
 #include "Memento/Memento.h"
+
 #include <list>
 
-class Caretaker {
+class Caretaker 
+{
     private:
         std::list<Memento*> canvasses;
+        
     public:
         void storeMemento(Memento*);
         Memento retrieveMemento(); 
