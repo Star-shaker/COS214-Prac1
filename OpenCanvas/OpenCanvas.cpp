@@ -64,6 +64,7 @@ OpenCanvas::OpenCanvas(bool test)
             }
 
             if (input == "c") {
+                this->storeCanvasState(newCanvas);
                 cout << "Please select the number of the shape to clone:\n";
                 newCanvas->listShapes();
                 string cloneNumString;
