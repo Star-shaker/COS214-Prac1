@@ -17,8 +17,9 @@ class OpenCanvas
         list<Canvas*> canvasses;
     
     public:
-        OpenCanvas();
+        OpenCanvas(bool test);
         ~OpenCanvas();
+        void testCanvas();
         void exportToFile(Canvas canvas);
         Canvas* createCanvas();
         list<Canvas*> listCanvasses();

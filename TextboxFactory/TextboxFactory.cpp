@@ -2,6 +2,7 @@
 
 TextboxFactory::TextboxFactory() : ShapeFactory()
 {
+    this->text = "";
     cout << "TextboxFactory created!\n";
 }
 
@@ -120,6 +121,18 @@ Shape* TextboxFactory::createShape()
     Shape* newTextbox = new Textbox(x, y, l, w, input_colour, input_text);
     cout << "Shape created: " << newTextbox->shapeType() << endl;
     return newTextbox;
+}
+
+Shape* TextboxFactory::createShape(int l, int w, int x, int y, string colour) {
+    if (this->text == "") {
+        this->text = "Default Text";
+    }
+
+    return new Textbox(x, y, l, w, colour, this->text);
+}
+
+void TextboxFactory::setText(string text) {
+    this->text = text;
 }
 
 void TextboxFactory::toString()

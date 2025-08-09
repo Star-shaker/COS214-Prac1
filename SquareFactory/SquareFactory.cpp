@@ -99,6 +99,10 @@ Shape* SquareFactory::createShape()
     return newSquare;
 }
 
+Shape* SquareFactory::createShape(int l, int w, int x, int y, string colour) {
+    return new Square(x, y, l, colour);
+}
+
 void SquareFactory::toString()
 {
     cout << "Square created!" << endl;

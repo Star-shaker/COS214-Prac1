@@ -23,12 +23,16 @@ class Canvas
         
     public:
         // Canvas();
-        ~Canvas();
+        // ~Canvas();
         void listShapes();
         // Memento* captureCurrent();
         // void undoAction(Memento*);
         void drawShape(string input);
-        void cloneShape();
+
+        // Overload drawShape to allow for passing parameters
+        void drawShape(string input, int l, int w, int x, int y, string colour);
+        void drawTextbox(int l, int w, int x, int y, string colour, string text);
+        bool cloneShape(int index);
 };
 
 #endif
