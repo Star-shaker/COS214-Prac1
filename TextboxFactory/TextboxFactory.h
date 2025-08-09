@@ -17,12 +17,10 @@ class TextboxFactory : public ShapeFactory
     public:
         TextboxFactory();
         TextboxFactory(string text);
-        virtual ~TextboxFactory();
         
         Shape* createShape();
         virtual Shape* createShape(int l, int w, int x, int y, string colour);
         void setText(string text);
-        void toString();
 };
 
 #endif

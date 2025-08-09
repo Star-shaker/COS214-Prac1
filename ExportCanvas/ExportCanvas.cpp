@@ -7,8 +7,3 @@ void ExportCanvas::exportToFile(Canvas* canvas)
     renderElements();
     saveToFile();
 }
-
-ExportCanvas::~ExportCanvas()
-{
-    // TODO : Memory management!
-}

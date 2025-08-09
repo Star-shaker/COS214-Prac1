@@ -13,11 +13,8 @@ class ShapeFactory
 
     public:
         Shape* anOperation();
-        ShapeFactory(){};
-        virtual ~ShapeFactory() {};
         virtual Shape* createShape() = 0;
         virtual Shape* createShape(int l, int w, int x, int y, string colour) = 0;
-        virtual void toString() = 0;
 };
 
 #endif 

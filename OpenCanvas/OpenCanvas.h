@@ -5,6 +5,8 @@
 
 #include "Canvas/Canvas.h"
 #include "ExportCanvas/ExportCanvas.h"
+#include "PDFExporter/PDFExporter.h"
+#include "PNGExporter/PNGExporter.h"
 #include "Caretaker/Caretaker.h"
 
 #include <list>
@@ -15,15 +17,15 @@ using namespace std;
 class OpenCanvas
 {
     private:
-        list<Canvas*> canvasses;
+        Canvas* canvas;
         Caretaker* caretaker;
+        
     public:
         OpenCanvas(bool test);
         ~OpenCanvas();
-        void testCanvas();
-        void exportToFile(Canvas canvas);
         Canvas* createCanvas();
-        list<Canvas*> listCanvasses();
+        void testCanvas();
+        void exportToFile(Canvas* canvas, int input);
         void storeCanvasState(Canvas* canvas);
 };
 

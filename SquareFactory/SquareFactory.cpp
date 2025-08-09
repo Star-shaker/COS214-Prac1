@@ -12,7 +12,7 @@ Shape* SquareFactory::createShape()
     int s;
     while (!s_valid)
     {
-        cout << "Enter the length: ";
+        cout << "\033[1;92mEnter the length: \033[0m";
         cin >> input_s;
 
         try
@@ -22,7 +22,7 @@ Shape* SquareFactory::createShape()
         }
         catch(const exception& e)
         {
-            cout << "Not a valid integer. Please try again." << endl;
+            cout << "\033[1;31mNot a valid integer. Please try again.\033[0m" << endl;
         }
     }
 
@@ -31,7 +31,7 @@ Shape* SquareFactory::createShape()
     int x;
     while (!x_valid)
     {
-        cout << "Enter the x-coordinate: ";
+        cout << "\033[1;92mEnter the x-coordinate: \033[0m";
         cin >> input_x;
 
         try
@@ -41,7 +41,7 @@ Shape* SquareFactory::createShape()
         }
         catch(const exception& e)
         {
-            cout << "Not a valid integer. Please try again." << endl;
+            cout << "\033[1;31mNot a valid integer. Please try again.\033[0m" << endl;
         }
     }
     
@@ -50,7 +50,7 @@ Shape* SquareFactory::createShape()
     int y;
     while (!y_valid)
     {
-        cout << "Enter the y-coordinate: ";
+        cout << "\033[1;92mEnter the y-coordinate: \033[0m";
         cin >> input_y;
 
         try
@@ -60,7 +60,7 @@ Shape* SquareFactory::createShape()
         }
         catch(const exception& e)
         {
-            cout << "Not a valid integer. Please try again." << endl;
+            cout << "\033[1;31mNot a valid integer. Please try again.\033[0m" << endl;
         }
     }
 
@@ -68,7 +68,7 @@ Shape* SquareFactory::createShape()
     bool colour_valid = false;
     while (!colour_valid)
     {
-        cout << "Enter the colour: ";
+        cout << "\033[1;92mEnter the colour: \033[0m";
         cin >> input_colour;
 
         colour_valid = true;
@@ -89,26 +89,16 @@ Shape* SquareFactory::createShape()
 
         if (colour_valid == false)
         {
-            cout << "Not a valid colour. Please try again." << endl;
+            cout << "\033[1;31mNot a valid colour. Please try again.\033[0m" << endl;
         }
-
     }
 
     Shape* newSquare = new Square(x, y, s, input_colour);
-    cout << "Shape created: " << newSquare->shapeType() << endl;
+    cout << "\033[1;33mShape created:\033[0m " << newSquare->shapeType() << endl;
     return newSquare;
 }
 
-Shape* SquareFactory::createShape(int l, int w, int x, int y, string colour) {
+Shape* SquareFactory::createShape(int l, int w, int x, int y, string colour) 
+{
     return new Square(x, y, l, colour);
-}
-
-void SquareFactory::toString()
-{
-    cout << "Square created!" << endl;
-}
-
-SquareFactory::~SquareFactory()
-{
-    // TODO: Memory management!
 }

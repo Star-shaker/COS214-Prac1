@@ -3,14 +3,12 @@
 Textbox::Textbox(int x, int y, int l, int w, std::string colour, std::string text)
 : Shape(x, y, l, w, colour), text(text) {}
 
-Shape* Textbox::clone() {
+Shape* Textbox::clone() 
+{
     return new Textbox(*this);
 }
 
-std::string Textbox::shapeType() {
+std::string Textbox::shapeType() 
+{
     return "Textbox";
-}
-
-std::string Textbox::getText() {
-    return this->text;
 }

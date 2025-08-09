@@ -3,10 +3,12 @@
 Square::Square(int x, int y, int side, std::string colour)
 : Shape(x, y, side, side, colour) {}
 
-Shape* Square::clone() {
+Shape* Square::clone() 
+{
     return new Square(*this);
 }
 
-std::string Square::shapeType() {
+std::string Square::shapeType() 
+{
     return "Square";
 }

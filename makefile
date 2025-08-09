@@ -1,38 +1,59 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -g -Wall -I.
+LDFLAGS =
 
-SRC = main.cpp \
-	  OpenCanvas/OpenCanvas.cpp \
-	  Canvas/Canvas.cpp \
-	  Shape/Shape.cpp \
-	  Square/Square.cpp \
-	  Rectangle/Rectangle.cpp \
-	  Textbox/Textbox.cpp \
-	  ShapeFactory/ShapeFactory.cpp \
-	  SquareFactory/SquareFactory.cpp \
-	  RectangleFactory/RectangleFactory.cpp \
-	  TextboxFactory/TextboxFactory.cpp \
-	  Memento/Memento.cpp \
-	  Caretaker/Caretaker.cpp
+SRC_COMMON = \
+      OpenCanvas/OpenCanvas.cpp \
+      Canvas/Canvas.cpp \
+      Shape/Shape.cpp \
+      Square/Square.cpp \
+      Rectangle/Rectangle.cpp \
+      Textbox/Textbox.cpp \
+      ShapeFactory/ShapeFactory.cpp \
+      SquareFactory/SquareFactory.cpp \
+      RectangleFactory/RectangleFactory.cpp \
+      TextboxFactory/TextboxFactory.cpp \
+      Memento/Memento.cpp \
+      Caretaker/Caretaker.cpp \
+	  ExportCanvas/ExportCanvas.cpp \
+	  PDFExporter/PDFExporter.cpp \
+	  PNGExporter/PNGExporter.cpp
 
+OBJ_COMMON = $(SRC_COMMON:.cpp=.o)
 
-OBJ = $(SRC:.cpp=.o)
+TARGET_TEST = canvas_test
+TARGET_DEMO = canvas_demo
 
-TARGET = canvas_app
+all: test
 
-all: $(TARGET)
+test: $(TARGET_TEST)
+	./$(TARGET_TEST)
 
-$(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
+$(TARGET_TEST): main.cpp $(OBJ_COMMON)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ main.cpp $(OBJ_COMMON)
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+demo: $(TARGET_DEMO)
+	./$(TARGET_DEMO)
 
-run: $(TARGET)
-	./$(TARGET)
-
-valgrind: $(TARGET)
-	valgrind ./$(TARGET)
+$(TARGET_DEMO): demo.cpp $(OBJ_COMMON)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ demo.cpp $(OBJ_COMMON)
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f $(OBJ_COMMON) $(TARGET_TEST) $(TARGET_DEMO)
+	find . -name '*.gcda' -delete
+	find . -name '*.gcno' -delete
+	find . -name '*.gcov' -delete
+	rm -f coverage.html
+
+COVERAGE_FLAGS = --coverage
+
+coverage-html: clean
+	$(MAKE) CXXFLAGS="$(CXXFLAGS) $(COVERAGE_FLAGS)" LDFLAGS="$(LDFLAGS) $(COVERAGE_FLAGS)" $(TARGET_TEST)
+	./$(TARGET_TEST)
+	gcovr -r . --html -o coverage.html
+	
+valgrind-test: $(TARGET_TEST)
+	valgrind --leak-check=full ./$(TARGET_TEST)
+
+valgrind-demo: $(TARGET_DEMO)
+	valgrind --leak-check=full ./$(TARGET_DEMO)

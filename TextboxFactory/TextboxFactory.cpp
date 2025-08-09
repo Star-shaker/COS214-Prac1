@@ -17,7 +17,7 @@ Shape *TextboxFactory::createShape()
     int l;
     while (!l_valid)
     {
-        cout << "Enter the length: ";
+        cout << "\033[1;92mEnter the length: \033[0m";
         cin >> input_l;
 
         try
@@ -27,7 +27,7 @@ Shape *TextboxFactory::createShape()
         }
         catch (const exception &e)
         {
-            cout << "Not a valid integer. Please try again." << endl;
+            cout << "\033[1;31mNot a valid integer. Please try again.\033[0m" << endl;
         }
     }
 
@@ -36,7 +36,7 @@ Shape *TextboxFactory::createShape()
     int w;
     while (!w_valid)
     {
-        cout << "Enter the width: ";
+        cout << "\033[1;92mEnter the width: \033[0m";
         cin >> input_w;
 
         try
@@ -46,7 +46,7 @@ Shape *TextboxFactory::createShape()
         }
         catch (const exception &e)
         {
-            cout << "Not a valid integer. Please try again." << endl;
+            cout << "\033[1;31mNot a valid integer. Please try again.\033[0m" << endl;
         }
     }
 
@@ -55,7 +55,7 @@ Shape *TextboxFactory::createShape()
     int x;
     while (!x_valid)
     {
-        cout << "Enter the x-coordinate: ";
+        cout << "\033[1;92mEnter the x-coordinate: \033[0m";
         cin >> input_x;
 
         try
@@ -65,7 +65,7 @@ Shape *TextboxFactory::createShape()
         }
         catch (const exception &e)
         {
-            cout << "Not a valid integer. Please try again." << endl;
+            cout << "\033[1;31mNot a valid integer. Please try again.\033[0m" << endl;
         }
     }
 
@@ -74,7 +74,7 @@ Shape *TextboxFactory::createShape()
     int y;
     while (!y_valid)
     {
-        cout << "Enter the y-coordinate: ";
+        cout << "\033[1;92mEnter the y-coordinate: \033[0m";
         cin >> input_y;
 
         try
@@ -84,7 +84,7 @@ Shape *TextboxFactory::createShape()
         }
         catch (const exception &e)
         {
-            cout << "Not a valid integer. Please try again." << endl;
+            cout << "\033[1;31mNot a valid integer. Please try again.\033[0m" << endl;
         }
     }
 
@@ -92,7 +92,7 @@ Shape *TextboxFactory::createShape()
     bool colour_valid = false;
     while (!colour_valid)
     {
-        cout << "Enter the colour: ";
+        cout << "\033[1;92mEnter the colour: \033[0m";
         cin >> input_colour;
 
         colour_valid = true;
@@ -113,16 +113,16 @@ Shape *TextboxFactory::createShape()
 
         if (colour_valid == false)
         {
-            cout << "Not a valid colour. Please try again." << endl;
+            cout << "\033[1;31mNot a valid colour. Please try again.\033[0m" << endl;
         }
     }
 
     string input_text;
-    cout << "Enter the text: ";
+    cout << "\033[1;92mEnter the text: \033[0m";
     cin >> input_text;
 
     Shape *newTextbox = new Textbox(x, y, l, w, input_colour, input_text);
-    cout << "Shape created: " << newTextbox->shapeType() << endl;
+    cout << "\033[1;33mShape created:\033[0m " << newTextbox->shapeType() << endl;
     return newTextbox;
 }
 
@@ -139,14 +139,4 @@ Shape *TextboxFactory::createShape(int l, int w, int x, int y, string colour)
 void TextboxFactory::setText(string text)
 {
     this->text = text;
-}
-
-void TextboxFactory::toString()
-{
-    cout << "TextBox created!" << endl;
-}
-
-TextboxFactory::~TextboxFactory()
-{
-    // TODO: Memory management!
 }

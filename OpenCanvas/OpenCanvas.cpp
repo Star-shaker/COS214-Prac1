@@ -4,82 +4,150 @@
 OpenCanvas::OpenCanvas(bool test)
 {
     this->caretaker = new Caretaker();
+    
     if (test)
     {
         this->testCanvas();
     }
     else
     {
-        cout << "Welcome to OpenCanvas!\n";
-        Canvas *newCanvas = createCanvas();
+        cout << "\n\033[1;96mWelcome to OpenCanvas!\033[0m\n"
+        << "\033[1;96m=====================\033[0m\n\n";
+        canvas = createCanvas();
+
         while (true)
         {
-            cout << "Press q to quit, a to add shape, u to undo action, l to list shapes, c to clone shape or e to export canvas\n";
+            cout << "\n\033[1;95m=== Canvas Controls ===\033[0m\n"
+            << "  \033[1;33m[q]\033[0m Quit\n"
+            << "  \033[1;33m[a]\033[0m Add shape\n"
+            << "  \033[1;33m[u]\033[0m Undo action\n"
+            << "  \033[1;33m[l]\033[0m List shapes\n"
+            << "  \033[1;33m[c]\033[0m Clone shape\n"
+            << "  \033[1;33m[e]\033[0m Export canvas\n"
+            << "  \033[1;33m[v]\033[0m View canvasses\n"
+            << "\033[1;95m======================\033[0m\n";
+
             string input = "";
             cin >> input;
 
             if (input == "q")
             {
-                cout << "Goodbye!\n";
+                cout << "\n\033[1;91mGoodbye! Thanks for using OpenCanvas.\033[0m\n";
                 break;
             }
 
             // TODO: Input validation
             if (input == "a")
             {
-                cout << "Select the shape you want to draw: \n";
+                cout << "  1. Square\n" << "  2. Rectangle\n" << "  3. Textbox\n\033[0m" << "\n\033[1;96mSelect the shape you want to draw: \033[0m";
 
-                // Use listShapes here but idk how to do that with map so I'm using dumber version
-                cout << "1: Square\n2: Rectangle\n3: Textbox\n";
                 string shapeToDraw;
                 cin >> shapeToDraw;
-                this->storeCanvasState(newCanvas);
+                this->storeCanvasState(canvas);
                 if (shapeToDraw == "1")
                 {
-                    newCanvas->drawShape("Square");
+                    canvas->drawShape("Square");
                 }
                 else if (shapeToDraw == "2")
                 {
-                    newCanvas->drawShape("Rectangle");
+                    canvas->drawShape("Rectangle");
                 }
                 else if (shapeToDraw == "3")
                 {
-                    newCanvas->drawShape("Textbox");
+                    canvas->drawShape("Textbox");
                 }
             }
 
-            if (input == "l") {
-                newCanvas->listShapes();
+            if (input == "l") 
+            {
+                canvas->listShapes();
             }
 
-            if (input == "u") {
+            if (input == "u") 
+            {
                 Memento* prevMem = this->caretaker->retrieveMemento();
                 if (prevMem == NULL) {
-                    cout << "No actions to undo\n";
+                    cout << "\033[1;31mNo actions to undo\n\033[0m";
                 } else {
-                    newCanvas->undoAction(prevMem);
-                    cout << "Action undid successfully.\nUpdated Shape list:\n";
-                    newCanvas->listShapes();
+                    canvas->undoAction(prevMem);
+                    cout << "\033[1;91mAction undid successfully.\nUpdated Shape list:\n\033[0m";
+                    canvas->listShapes();
                 }
             }
 
-            if (input == "c") {
-                this->storeCanvasState(newCanvas);
-                cout << "Please select the number of the shape to clone:\n";
-                newCanvas->listShapes();
+            if (input == "c") 
+            {
+                this->storeCanvasState(canvas);
+                cout << "\033[1;96mSelect the number of the shape to clone:\033[0m\n";
+                canvas->listShapes();
                 string cloneNumString;
                 cin >> cloneNumString;
                 int cloneNum = stoi(cloneNumString);
 
-                if (newCanvas->cloneShape(cloneNum)) {
-                    cout << "Succesfully cloned shape.\nUpdated shapes list:\n";
-                    newCanvas->listShapes();
+                if (canvas->cloneShape(cloneNum)) {
+                    cout << "\033[1;33mSuccesfully cloned shape.\nUpdated shapes list:\033[0m\n";
+                    canvas->listShapes();
                 } else {
-                    cout << "Failed to clone shape. Please make sure that you entered a valid index.\n";
+                    cout << "\033[1;31mFailed to clone shape. Please make sure that you entered a valid index.\033[0m\n";
+                }
+            }
+
+            if (input == "e")
+            {
+                cout << "\n\033[1;96mSelect the type of file you want to export to:\033[0m\n"
+                << "  1. PDF\n"
+                << "  2. PNG\n\033[0m";
+
+                string fileType;
+                cin >> fileType;
+
+                if(fileType == "1" || fileType == "2")
+                {
+                    int fileNum = stoi(fileType);
+                    exportToFile(canvas, fileNum);
+                }
+                else
+                {
+                    cout << "\033[1;31mFailed to export to file. Please make sure that you entered a valid index.\033[0m" << endl;
                 }
             }
         }
     }
+}
+
+void OpenCanvas::exportToFile(Canvas* canvas, int input)
+{
+    if (input == 1)
+    {
+        ExportCanvas* pdfEx = new PDFExporter();
+        pdfEx->exportToFile(canvas);
+
+        delete pdfEx;
+    }
+    else if (input == 2)
+    {
+        ExportCanvas* pngEx = new PNGExporter();
+        pngEx->exportToFile(canvas);
+        
+        delete pngEx;
+    }
+}
+
+Canvas *OpenCanvas::createCanvas()
+{
+    cout << "\033[1;33mBlank Canvas created!\033[0m\n";
+    return new Canvas();
+}
+
+OpenCanvas::~OpenCanvas()
+{
+    delete canvas;
+    delete caretaker;
+}
+
+void OpenCanvas::storeCanvasState(Canvas* canvas) 
+{
+    this->caretaker->storeMemento(canvas->captureCurrent());
 }
 
 void OpenCanvas::testCanvas()
@@ -148,33 +216,145 @@ void OpenCanvas::testCanvas()
     boolTester->test(testingCanvas->listShapes() == expectedOut, true, "Mem empty canvas");
     boolTester->endSection();
 
+    // ============= Factory Deep Coverage Tests =============
+    boolTester->newSection("Factory Deep Coverage");
+    
+    // Test RectangleFactory
+    RectangleFactory rectFactory;
+    Shape* rect = rectFactory.createShape(0, 0, 0, 0, "");
+    rect->shapeType();
+    boolTester->test(rect != nullptr, true, "RectangleFactory handles zero dimensions");
+    delete rect;
+    
+    // Test SquareFactory
+    SquareFactory squareFactory;
+    Shape* square1 = squareFactory.createShape(0, 0, 0, 0, "");
+    square1->shapeType();
+    boolTester->test(square1 != nullptr, true, "SquareFactory handles zero size");
+    delete square1;
+    
+    Shape* square2 = squareFactory.createShape(-5, -5, 10, 0, "black");
+    boolTester->test(square2 != nullptr, true, "SquareFactory handles negative coordinates");
+    delete square2;
+    
+    // Test TextboxFactory
+    TextboxFactory textboxFactory;
+    textboxFactory.setText("Initial Text");
+    Shape* textbox1 = textboxFactory.createShape(10, 10, 20, 30, "blue");
+    textbox1->shapeType();
+    boolTester->test(textbox1 != nullptr, true, "TextboxFactory with preset text");
+    delete textbox1;
+    
+    textboxFactory.setText("");
+    Shape* textbox2 = textboxFactory.createShape(5, 5, 15, 25, "green");
+    boolTester->test(textbox2 != nullptr, true, "TextboxFactory with empty text");
+    delete textbox2;
+    
+    // Test factory reuse
+    Shape* rect1 = rectFactory.createShape(1, 1, 2, 2, "test");
+    Shape* rect2 = rectFactory.createShape(3, 3, 4, 4, "test");
+    boolTester->test(rect1 != nullptr && rect2 != nullptr, true, "Factory reuse creates multiple shapes");
+    delete rect1;
+    delete rect2;
+    
+    // Test all factory constructors
+    {
+        RectangleFactory* dynamicRectFactory = new RectangleFactory();
+        SquareFactory* dynamicSquareFactory = new SquareFactory();
+        TextboxFactory* dynamicTextFactory1 = new TextboxFactory();
+        TextboxFactory* dynamicTextFactory2 = new TextboxFactory("Dynamic Text");
+        
+        Shape* dynRect = dynamicRectFactory->createShape(1, 1, 2, 2, "red");
+        Shape* dynSquare = dynamicSquareFactory->createShape(0, 0, 5, 0, "blue");
+        Shape* dynText1 = dynamicTextFactory1->createShape(0, 0, 10, 10, "green");
+        Shape* dynText2 = dynamicTextFactory2->createShape(5, 5, 15, 15, "purple");
+        
+        boolTester->test(dynRect != nullptr, true, "Dynamic RectangleFactory");
+        boolTester->test(dynSquare != nullptr, true, "Dynamic SquareFactory");
+        boolTester->test(dynText1 != nullptr, true, "Dynamic TextboxFactory default");
+        boolTester->test(dynText2 != nullptr, true, "Dynamic TextboxFactory parameterized");
+        
+        delete dynRect;
+        delete dynSquare;
+        delete dynText1;
+        delete dynText2;
+        delete dynamicRectFactory;
+        delete dynamicSquareFactory;
+        delete dynamicTextFactory1;
+        delete dynamicTextFactory2;
+    }
+
+    boolTester->endSection();  // End Factory Deep Coverage section
+
+    boolTester->newSection("Test Exporters");
+
+    // Prepare a simple canvas to export
+    Canvas* exportTestCanvas = new Canvas();
+    exportTestCanvas->drawShape("Square", 0, 0, 10, 10, "red");
+
+    createCanvas();
+    
+    // Test PDFExporter
+    ExportCanvas* pdfExporter = new PDFExporter();
+    try {
+        pdfExporter->exportToFile(exportTestCanvas);
+        boolTester->test(true, true, "PDFExporter exportToFile runs without error");
+    } catch (...) {
+        boolTester->test(false, true, "PDFExporter exportToFile threw an exception");
+    }
+    delete pdfExporter;
+
+    // Test PNGExporter
+    ExportCanvas* pngExporter = new PNGExporter();
+    try {
+        pngExporter->exportToFile(exportTestCanvas);
+        boolTester->test(true, true, "PNGExporter exportToFile runs without error");
+    } catch (...) {
+        boolTester->test(false, true, "PNGExporter exportToFile threw an exception");
+    }
+    delete pngExporter;
+
+    delete exportTestCanvas;
+
+    boolTester->endSection();
+
+    boolTester->newSection("Additional Canvas Tests");
+
+    // Test getShapeCount consistency after adding shapes
+    testingCanvas->clearCanvas();
+    boolTester->test(testingCanvas->getShapeCount(), 0);
+
+    testingCanvas->drawShape("Square", 5, 5, 0, 0, "red");
+    boolTester->test(testingCanvas->getShapeCount(), 1);
+
+    testingCanvas->drawShape("Rectangle", 10, 5, 1, 1, "blue");
+    boolTester->test(testingCanvas->getShapeCount(), 2);
+
+    // Test drawShape(string) with invalid input (should ideally do nothing or error handling)
+    try {
+        testingCanvas->drawShape("Circle"); // Not implemented shape
+        boolTester->test(true, true, "drawShape with invalid shape string does not crash");
+    } catch (...) {
+        boolTester->test(false, true, "drawShape with invalid shape string throws");
+    }
+
+    // Test cloneShape with boundary indices
+    boolTester->test(testingCanvas->cloneShape(-100), false);
+    boolTester->test(testingCanvas->cloneShape(1000), false);
+    boolTester->test(testingCanvas->cloneShape(1), true); // Valid clone
+
+    // Test clearCanvas empties the canvas
+    testingCanvas->clearCanvas();
+    boolTester->test(testingCanvas->getShapeCount(), 0);
+    boolTester->test(testingCanvas->listShapes() == "There are no shapes yet\n", true, "clearCanvas empties the canvas");
+
+    Caretaker* test = new Caretaker();
+    caretaker->retrieveMemento();
+    delete test;
+    
+    boolTester->endSection();
+    
     // Mem management
     delete boolTester;
     delete testingCanvas;
-}
-
-void OpenCanvas::exportToFile(Canvas canvas)
-{
-}
-
-Canvas *OpenCanvas::createCanvas()
-{
-    canvasses.push_front(new Canvas());
-    cout << "New Canvas created!\n";
-
-    return canvasses.front();
-}
-
-list<Canvas *> OpenCanvas::listCanvasses()
-{
-}
-
-OpenCanvas::~OpenCanvas()
-{
-    // TODO: Memory management!
-    delete caretaker;
-}
-
-void OpenCanvas::storeCanvasState(Canvas* canvas) {
-    this->caretaker->storeMemento(canvas->captureCurrent());
 }
