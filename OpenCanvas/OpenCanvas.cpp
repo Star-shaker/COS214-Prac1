@@ -4,42 +4,65 @@
 OpenCanvas::OpenCanvas(bool test)
 {
     this->caretaker = new Caretaker();
-    if (test) {
+    if (test)
+    {
         this->testCanvas();
-    } else {
+    }
+    else
+    {
         cout << "Welcome to OpenCanvas!\n";
-        Canvas* newCanvas = createCanvas();
-
-        cout << "Select the shape you want to draw: \n"; 
-
-        // Use listShapes here but idk how to do that with map so I'm using dumber version
-        cout << "1: Square\n2: Rectangle\n3: Textbox\n";
-
-        string input = "";
-        cin >> input;
-
-        // TODO: Input validation
-        if(input == "1")
+        Canvas *newCanvas = createCanvas();
+        while (true)
         {
-            newCanvas->drawShape("Square");
+            cout << "Press q to quit, a to add shape, u to undo action, l to list shapes, c to clone shape or e to export canvas\n";
+            string input = "";
+            cin >> input;
+
+            if (input == "q")
+            {
+                cout << "Goodbye!\n";
+                break;
+            }
+
+            // TODO: Input validation
+            if (input == "a")
+            {
+                cout << "Select the shape you want to draw: \n";
+
+                // Use listShapes here but idk how to do that with map so I'm using dumber version
+                cout << "1: Square\n2: Rectangle\n3: Textbox\n";
+                string shapeToDraw;
+                cin >> shapeToDraw;
+                if (shapeToDraw == "1")
+                {
+                    newCanvas->drawShape("Square");
+                }
+                else if (shapeToDraw == "2")
+                {
+                    newCanvas->drawShape("Rectangle");
+                }
+                else if (shapeToDraw == "3")
+                {
+                    newCanvas->drawShape("Textbox");
+                }
+
+                this->storeCanvasState(newCanvas);
+            }
+
+            if (input == "l") {
+                newCanvas->listShapes();
+            }
         }
-        else if(input == "2")
-        {
-            newCanvas->drawShape("Rectangle");
-        }
-        else if(input == "3")
-        {
-            newCanvas->drawShape("Textbox");
-        }
-    }   
+    }
 }
 
-void OpenCanvas::testCanvas() {
+void OpenCanvas::testCanvas()
+{
     //----------Test shapes clone-----------------
-    UnitTester<bool>* boolTester = new UnitTester<bool>();
+    UnitTester<bool> *boolTester = new UnitTester<bool>();
     boolTester->newSection("Test shapes clone");
     // Create testing canvas
-    Canvas* testingCanvas = new Canvas();
+    Canvas *testingCanvas = new Canvas();
 
     // Test clone on empty canvas, should return false
     boolTester->test(testingCanvas->cloneShape(0), false);
@@ -106,10 +129,9 @@ void OpenCanvas::testCanvas() {
 
 void OpenCanvas::exportToFile(Canvas canvas)
 {
-    
 }
 
-Canvas* OpenCanvas::createCanvas()
+Canvas *OpenCanvas::createCanvas()
 {
     canvasses.push_front(new Canvas());
     cout << "New Canvas created!\n";
@@ -117,12 +139,15 @@ Canvas* OpenCanvas::createCanvas()
     return canvasses.front();
 }
 
-list<Canvas*> OpenCanvas::listCanvasses()
+list<Canvas *> OpenCanvas::listCanvasses()
 {
-
 }
 
 OpenCanvas::~OpenCanvas()
 {
     // TODO: Memory management!
+}
+
+void OpenCanvas::storeCanvasState(Canvas* canvas) {
+    this->caretaker->storeMemento(canvas->captureCurrent());
 }

@@ -3,7 +3,7 @@
 #ifndef OpenCanvas_H
 #define OpenCanvas_H
 
-#include "../Canvas/Canvas.h"
+#include "Canvas/Canvas.h"
 #include "ExportCanvas/ExportCanvas.h"
 #include "Caretaker/Caretaker.h"
 
@@ -24,6 +24,7 @@ class OpenCanvas
         void exportToFile(Canvas canvas);
         Canvas* createCanvas();
         list<Canvas*> listCanvasses();
+        void storeCanvasState(Canvas* canvas);
 };
 
 #endif

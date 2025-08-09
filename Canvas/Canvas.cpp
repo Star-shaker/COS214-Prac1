@@ -20,19 +20,19 @@ void Canvas::drawShape(string input)
     if (input == "Square")
     {
         ShapeFactory *squareFactory = new SquareFactory();
-        newShape = squareFactory->anOperation();
+        newShape = squareFactory->createShape();
         delete squareFactory;
     }
     else if (input == "Rectangle")
     {
         ShapeFactory *rectangleFactory = new RectangleFactory();
-        newShape = rectangleFactory->anOperation();
+        newShape = rectangleFactory->createShape();
         delete rectangleFactory;
     }
     else if (input == "Textbox")
     {
         ShapeFactory *textboxFactory = new TextboxFactory();
-        newShape = textboxFactory->anOperation();
+        newShape = textboxFactory->createShape();
         delete textboxFactory;
     }
 
