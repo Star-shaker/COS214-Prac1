@@ -8,10 +8,10 @@
 //     this->shapes = memento->getState();
 // }
 
-Canvas::Canvas()
-{
+// Canvas::Canvas()
+// {
     
-}
+// }
 
 void Canvas::drawShape(string input)
 {
