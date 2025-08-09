@@ -1,15 +1,16 @@
 #include "RectangleFactory.h"
 
-#include <iostream>
-#include <string>
-using namespace std;
+RectangleFactory::RectangleFactory() : ShapeFactory()
+{
+    cout << "RectangleFactory created!\n";
+}
 
 Shape* RectangleFactory::createShape()
 {
     string input_l;
     bool l_valid = false;
     int l;
-    while (l_valid)
+    while (!l_valid)
     {
         cout << "Enter the length: ";
         cin >> input_l;
@@ -28,7 +29,7 @@ Shape* RectangleFactory::createShape()
     string input_w;
     bool w_valid = false;
     int w;
-    while (w_valid)
+    while (!w_valid)
     {
         cout << "Enter the width: ";
         cin >> input_w;
@@ -47,7 +48,7 @@ Shape* RectangleFactory::createShape()
     string input_x;
     bool x_valid = false;
     int x;
-    while (x_valid)
+    while (!x_valid)
     {
         cout << "Enter the x-coordinate: ";
         cin >> input_x;
@@ -66,7 +67,7 @@ Shape* RectangleFactory::createShape()
     string input_y;
     bool y_valid = false;
     int y;
-    while (y_valid)
+    while (!y_valid)
     {
         cout << "Enter the y-coordinate: ";
         cin >> input_y;
@@ -89,6 +90,8 @@ Shape* RectangleFactory::createShape()
         cout << "Enter the colour: ";
         cin >> input_colour;
 
+        colour_valid = true;
+
         if (input_colour.empty())
         {
             colour_valid = false;
@@ -107,10 +110,11 @@ Shape* RectangleFactory::createShape()
         {
             cout << "Not a valid colour. Please try again." << endl;
         }
-
     }
 
     Shape* newRectangle = new Rectangle(x, y, l, w, input_colour);
+    cout << "Shape created: " << newRectangle->shapeType() << endl;
+    return newRectangle;
 }
 
 void RectangleFactory::toString()

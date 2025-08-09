@@ -2,7 +2,7 @@
 
 void PNGExporter::saveToFile()
 {
-    
+    cout << "PNG: Saved to file!";
 }
 
 void PNGExporter::prepareCanvas()

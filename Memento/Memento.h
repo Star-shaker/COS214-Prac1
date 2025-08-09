@@ -1,12 +1,14 @@
-#ifndef MEMENTO
-#define MEMENTO
+#ifndef MEMENTO_H
+#define MEMENTO_H
 
 #include "Shape/Shape.h"
 #include <vector>
 
-class Memento {
+class Memento 
+{
     private:
         std::vector<Shape*> shapes;
+        
     public:
         Memento(std::vector<Shape*>& elements);
         std::vector<Shape*> getState();
