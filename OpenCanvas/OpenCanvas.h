@@ -3,8 +3,9 @@
 #ifndef OpenCanvas_H
 #define OpenCanvas_H
 
-#include "Canvas/Canvas.h"
+#include "../Canvas/Canvas.h"
 #include "ExportCanvas/ExportCanvas.h"
+#include "Caretaker/Caretaker.h"
 
 #include <list>
 #include <iostream>
@@ -15,7 +16,7 @@ class OpenCanvas
 {
     private:
         list<Canvas*> canvasses;
-    
+        Caretaker* caretaker;
     public:
         OpenCanvas(bool test);
         ~OpenCanvas();
@@ -23,7 +24,6 @@ class OpenCanvas
         void exportToFile(Canvas canvas);
         Canvas* createCanvas();
         list<Canvas*> listCanvasses();
-
 };
 
 #endif

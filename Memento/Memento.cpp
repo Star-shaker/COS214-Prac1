@@ -1,7 +1,9 @@
 #include "Memento.h"
 
 Memento::Memento(std::vector<Shape*>& elements) {
-    this->shapes = elements; // shapes is now copy of elements
+    for (int i = 0; i < elements.size(); i++) {
+        this->shapes.push_back(elements[i]->clone());
+    }
 }
 
 std::vector<Shape*> Memento::getState() {

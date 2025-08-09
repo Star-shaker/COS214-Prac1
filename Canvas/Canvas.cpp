@@ -107,3 +107,16 @@ void Canvas::clearCanvas() {
 
     this->shapes.clear();
 }
+
+Memento* Canvas::captureCurrent() {
+    return new Memento(this->shapes);
+}
+
+void Canvas::undoAction(Memento* memento) {
+    this->shapes.clear();
+
+    vector<Shape*> memShapes = memento->getState();
+    for (int i = 0; i < memShapes.size(); i++) {
+        this->shapes.push_back(memShapes[i]->clone());
+    }
+}

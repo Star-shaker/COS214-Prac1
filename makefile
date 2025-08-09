@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -I.
+CXXFLAGS = -std=c++17 -g -Wall -I.
 
 SRC = main.cpp \
 	  OpenCanvas/OpenCanvas.cpp \
@@ -11,7 +11,9 @@ SRC = main.cpp \
 	  ShapeFactory/ShapeFactory.cpp \
 	  SquareFactory/SquareFactory.cpp \
 	  RectangleFactory/RectangleFactory.cpp \
-	  TextboxFactory/TextboxFactory.cpp
+	  TextboxFactory/TextboxFactory.cpp \
+	  Memento/Memento.cpp \
+	  Caretaker/Caretaker.cpp
 
 
 OBJ = $(SRC:.cpp=.o)

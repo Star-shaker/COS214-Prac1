@@ -10,8 +10,7 @@
 #include "RectangleFactory/RectangleFactory.h"
 #include "TextboxFactory/TextboxFactory.h"
 
-// #include "Memento/Memento.h"
-// #include "Caretaker/Caretaker.h"
+#include "Memento/Memento.h"
 
 #include <string>
 using namespace std;
@@ -25,8 +24,8 @@ class Canvas
         // Canvas();
         // ~Canvas();
         string listShapes();
-        // Memento* captureCurrent();
-        // void undoAction(Memento*);
+        Memento* captureCurrent();
+        void undoAction(Memento*);
         void drawShape(string input);
 
         // Overload drawShape to allow for passing parameters

@@ -3,6 +3,7 @@
 
 OpenCanvas::OpenCanvas(bool test)
 {
+    this->caretaker = new Caretaker();
     if (test) {
         this->testCanvas();
     } else {
@@ -82,6 +83,22 @@ void OpenCanvas::testCanvas() {
     boolTester->test(testingCanvas->cloneShape(-1), false);
 
     boolTester->endSection();
+
+    //---------------Test Memento----------------
+    boolTester->newSection("Test memento");
+    this->caretaker->storeMemento(testingCanvas->captureCurrent());
+    testingCanvas->clearCanvas();
+    testingCanvas->undoAction(this->caretaker->retrieveMemento());
+    boolTester->test(testingCanvas->listShapes() == expectedOut, true, "List shapes memento");
+
+    // Test empty canvas
+    testingCanvas->clearCanvas();
+    this->caretaker->storeMemento(testingCanvas->captureCurrent());
+    testingCanvas->undoAction(this->caretaker->retrieveMemento());
+    expectedOut = "There are no shapes yet\n";
+    boolTester->test(testingCanvas->listShapes() == expectedOut, true, "Mem empty canvas");
+    boolTester->endSection();
+
     // Mem management
     delete boolTester;
     delete testingCanvas;

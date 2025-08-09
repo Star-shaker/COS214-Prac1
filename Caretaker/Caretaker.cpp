@@ -1,11 +1,13 @@
 #include "Caretaker.h"
 
-Caretaker::storeMemento(Memento* memento) { // add void infront of the function
+void Caretaker::storeMemento(Memento* memento) { // add void infront of the function
     this->canvasses.push_front(memento);
 }
 
-Caretaker::retrieveMemento() { // add Memento* infront of the function
-    return this->canvasses.pop_front();
+Memento* Caretaker::retrieveMemento() { // add Memento* infront of the function
+    Memento* out = this->canvasses.front();
+    this->canvasses.pop_front();
+    return out;
 }
 
 // The pop_front function does not return anything 
