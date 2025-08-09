@@ -12,7 +12,7 @@ class Caretaker
         
     public:
         void storeMemento(Memento*);
-        Memento retrieveMemento(); 
+        Memento* retrieveMemento(); 
 };
 
 #endif

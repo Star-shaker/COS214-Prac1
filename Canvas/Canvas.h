@@ -10,10 +10,8 @@
 #include "RectangleFactory/RectangleFactory.h"
 #include "TextboxFactory/TextboxFactory.h"
 
-// #include "Memento/Memento.h"
-// #include "Caretaker/Caretaker.h"
+#include "Memento/Memento.h"
 
-#include <map>
 #include <string>
 using namespace std;
 
@@ -24,12 +22,18 @@ class Canvas
         
     public:
         // Canvas();
-        ~Canvas();
-        std::map<int, Shape*> listShapes();
-        // Memento* captureCurrent();
-        // void undoAction(Memento*);
+        // ~Canvas();
+        string listShapes();
+        Memento* captureCurrent();
+        void undoAction(Memento*);
         void drawShape(string input);
-        void cloneShape();
+
+        // Overload drawShape to allow for passing parameters
+        void drawShape(string input, int l, int w, int x, int y, string colour);
+        void drawShape(int l, int w, int x, int y, string colour, string text);
+        bool cloneShape(int index);
+        void clearCanvas();
+
 };
 
 #endif

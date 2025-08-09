@@ -5,6 +5,7 @@
 
 #include "Canvas/Canvas.h"
 #include "ExportCanvas/ExportCanvas.h"
+#include "Caretaker/Caretaker.h"
 
 #include <list>
 #include <iostream>
@@ -15,15 +16,15 @@ class OpenCanvas
 {
     private:
         list<Canvas*> canvasses;
-    
+        Caretaker* caretaker;
     public:
-        OpenCanvas();
+        OpenCanvas(bool test);
         ~OpenCanvas();
+        void testCanvas();
         void exportToFile(Canvas canvas);
         Canvas* createCanvas();
         list<Canvas*> listCanvasses();
-
-
+        void storeCanvasState(Canvas* canvas);
 };
 
 #endif

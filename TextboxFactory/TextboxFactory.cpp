@@ -1,11 +1,16 @@
 #include "TextboxFactory.h"
 
-TextboxFactory::TextboxFactory() : ShapeFactory()
+TextboxFactory::TextboxFactory() : ShapeFactory(), text("")
 {
     cout << "TextboxFactory created!\n";
 }
 
-Shape* TextboxFactory::createShape()
+TextboxFactory::TextboxFactory(string text) : ShapeFactory(), text(text)
+{
+    cout << "TextboxFactory created!\n";
+}
+
+Shape *TextboxFactory::createShape()
 {
     string input_l;
     bool l_valid = false;
@@ -20,7 +25,7 @@ Shape* TextboxFactory::createShape()
             l = stoi(input_l);
             l_valid = true;
         }
-        catch(const exception& e)
+        catch (const exception &e)
         {
             cout << "Not a valid integer. Please try again." << endl;
         }
@@ -39,7 +44,7 @@ Shape* TextboxFactory::createShape()
             w = stoi(input_w);
             w_valid = true;
         }
-        catch(const exception& e)
+        catch (const exception &e)
         {
             cout << "Not a valid integer. Please try again." << endl;
         }
@@ -58,12 +63,12 @@ Shape* TextboxFactory::createShape()
             x = stoi(input_x);
             x_valid = true;
         }
-        catch(const exception& e)
+        catch (const exception &e)
         {
             cout << "Not a valid integer. Please try again." << endl;
         }
     }
-    
+
     string input_y;
     bool y_valid = false;
     int y;
@@ -77,7 +82,7 @@ Shape* TextboxFactory::createShape()
             y = stoi(input_y);
             y_valid = true;
         }
-        catch(const exception& e)
+        catch (const exception &e)
         {
             cout << "Not a valid integer. Please try again." << endl;
         }
@@ -97,9 +102,9 @@ Shape* TextboxFactory::createShape()
             colour_valid = false;
         }
 
-        for(int i = 0; i < input_colour.length(); i++)
+        for (int i = 0; i < input_colour.length(); i++)
         {
-            if(!isalpha(input_colour[i]))
+            if (!isalpha(input_colour[i]))
             {
                 colour_valid = false;
                 break;
@@ -110,16 +115,30 @@ Shape* TextboxFactory::createShape()
         {
             cout << "Not a valid colour. Please try again." << endl;
         }
-
     }
 
     string input_text;
     cout << "Enter the text: ";
     cin >> input_text;
 
-    Shape* newTextbox = new Textbox(x, y, l, w, input_colour, input_text);
+    Shape *newTextbox = new Textbox(x, y, l, w, input_colour, input_text);
     cout << "Shape created: " << newTextbox->shapeType() << endl;
     return newTextbox;
+}
+
+Shape *TextboxFactory::createShape(int l, int w, int x, int y, string colour)
+{
+    if (this->text == "")
+    {
+        this->text = "Default Text";
+    }
+
+    return new Textbox(x, y, l, w, colour, this->text);
+}
+
+void TextboxFactory::setText(string text)
+{
+    this->text = text;
 }
 
 void TextboxFactory::toString()
