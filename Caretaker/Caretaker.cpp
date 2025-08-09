@@ -5,6 +5,9 @@ void Caretaker::storeMemento(Memento* memento) { // add void infront of the func
 }
 
 Memento* Caretaker::retrieveMemento() { // add Memento* infront of the function
+    if (this->canvasses.empty()) {
+        return NULL;
+    }
     Memento* out = this->canvasses.front();
     this->canvasses.pop_front();
     return out;

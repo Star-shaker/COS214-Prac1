@@ -33,6 +33,7 @@ OpenCanvas::OpenCanvas(bool test)
                 cout << "1: Square\n2: Rectangle\n3: Textbox\n";
                 string shapeToDraw;
                 cin >> shapeToDraw;
+                this->storeCanvasState(newCanvas);
                 if (shapeToDraw == "1")
                 {
                     newCanvas->drawShape("Square");
@@ -45,12 +46,21 @@ OpenCanvas::OpenCanvas(bool test)
                 {
                     newCanvas->drawShape("Textbox");
                 }
-
-                this->storeCanvasState(newCanvas);
             }
 
             if (input == "l") {
                 newCanvas->listShapes();
+            }
+
+            if (input == "u") {
+                Memento* prevMem = this->caretaker->retrieveMemento();
+                if (prevMem == NULL) {
+                    cout << "No actions to undo\n";
+                } else {
+                    newCanvas->undoAction(prevMem);
+                    cout << "Action undid successfully.\nUpdated Shape list:\n";
+                    newCanvas->listShapes();
+                }
             }
         }
     }
@@ -146,6 +156,7 @@ list<Canvas *> OpenCanvas::listCanvasses()
 OpenCanvas::~OpenCanvas()
 {
     // TODO: Memory management!
+    delete caretaker;
 }
 
 void OpenCanvas::storeCanvasState(Canvas* canvas) {
