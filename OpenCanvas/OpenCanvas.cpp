@@ -62,6 +62,21 @@ OpenCanvas::OpenCanvas(bool test)
                     newCanvas->listShapes();
                 }
             }
+
+            if (input == "c") {
+                cout << "Please select the number of the shape to clone:\n";
+                newCanvas->listShapes();
+                string cloneNumString;
+                cin >> cloneNumString;
+                int cloneNum = stoi(cloneNumString);
+
+                if (newCanvas->cloneShape(cloneNum)) {
+                    cout << "Succesfully cloned shape.\nUpdated shapes list:\n";
+                    newCanvas->listShapes();
+                } else {
+                    cout << "Failed to clone shape. Please make sure that you entered a valid index.\n";
+                }
+            }
         }
     }
 }
