@@ -16,6 +16,7 @@ class TextboxFactory : public ShapeFactory
         string text;
     public:
         TextboxFactory();
+        TextboxFactory(string text);
         virtual ~TextboxFactory();
         
         Shape* createShape();

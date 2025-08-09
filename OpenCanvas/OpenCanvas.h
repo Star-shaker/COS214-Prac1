@@ -24,7 +24,6 @@ class OpenCanvas
         Canvas* createCanvas();
         list<Canvas*> listCanvasses();
 
-
 };
 
 #endif

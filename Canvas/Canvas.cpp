@@ -52,18 +52,26 @@ void Canvas::drawShape(string input, int l, int w, int x, int y, string colour) 
     }
 }
 
-void Canvas::listShapes()
+void Canvas::drawShape(int l, int w, int x, int y, string colour, string text) {
+    ShapeFactory* tbFact = new TextboxFactory("Some Text");
+    this->shapes.push_back(tbFact->createShape(l, w, x, y, colour));
+}
+
+string Canvas::listShapes()
 {
+    string out = "";
     if (shapes.empty())
     {
-        std::cout << "There are no shapes yet\n";
-        return;
+        out = "There are no shapes yet\n";
     }
 
     for (int i = 0; i < shapes.size(); i++)
     {
-        std::cout << std::to_string(i) + ", " + shapes[i]->shapeType() + "\n";
+        out += std::to_string(i) + ", " + shapes[i]->shapeType() + "\n";
     }
+
+    cout << out;
+    return out;
 }
 
 bool Canvas::cloneShape(int index)
@@ -86,4 +94,16 @@ bool Canvas::cloneShape(int index)
     this->shapes.push_back(this->shapes[index]->clone());
 
     return true;
+}
+
+void Canvas::clearCanvas() {
+    /*
+    Deallocates all Shape objects and empties vector
+    */
+
+    for (int i = 0; i < this->shapes.size(); i++) {
+        delete this->shapes[i];
+    }
+
+    this->shapes.clear();
 }

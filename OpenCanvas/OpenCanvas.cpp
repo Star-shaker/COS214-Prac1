@@ -46,16 +46,43 @@ void OpenCanvas::testCanvas() {
     // Test on Rectangle, assumes drawShape works
     testingCanvas->drawShape("Rectangle", 10, 10, 3, 4, "blue");
     boolTester->test(testingCanvas->cloneShape(0), true);
-    
+    string expectedOut = "0, Rectangle\n1, Rectangle\n";
+    boolTester->test(testingCanvas->listShapes() == expectedOut, true);
+    testingCanvas->clearCanvas();
+
+    // Test on square
+    testingCanvas->drawShape("Square", 10, 10, 3, 4, "blue");
+    boolTester->test(testingCanvas->cloneShape(0), true);
+    expectedOut = "0, Square\n1, Square\n";
+    boolTester->test(testingCanvas->listShapes() == expectedOut, true);
+    testingCanvas->clearCanvas();
+
+    // Test on textbox
+    testingCanvas->drawShape(10, 10, 3, 4, "blue", "SomeText");
+    boolTester->test(testingCanvas->cloneShape(0), true);
+    expectedOut = "0, Textbox\n1, Textbox\n";
+    boolTester->test(testingCanvas->listShapes() == expectedOut, true);
+    testingCanvas->clearCanvas();
     boolTester->endSection();
 
-    UnitTester<std::string>* stringTester = new UnitTester<std::string>();
-    stringTester->newSection("List shapes and canvasses tests");
+    // Test on all shapes
+    testingCanvas->drawShape("Rectangle", 10, 10, 3, 4, "blue");
+    testingCanvas->drawShape("Square", 10, 10, 3, 4, "blue");
+    testingCanvas->drawShape(10, 10, 3, 4, "blue", "SomeText");
 
-    stringTester->endSection();
+    boolTester->test(testingCanvas->cloneShape(0), true);
+    boolTester->test(testingCanvas->cloneShape(1), true);
+    boolTester->test(testingCanvas->cloneShape(2), true);
 
+    expectedOut = "0, Rectangle\n1, Square\n2, Textbox\n3, Rectangle\n4, Square\n5, Textbox\n";
+    boolTester->test(testingCanvas->listShapes() == expectedOut, true, "List shapes");
+
+    // Test out of bounds cloning
+    boolTester->test(testingCanvas->cloneShape(6), false);
+    boolTester->test(testingCanvas->cloneShape(-1), false);
+
+    boolTester->endSection();
     // Mem management
-    delete stringTester;
     delete boolTester;
     delete testingCanvas;
 }
