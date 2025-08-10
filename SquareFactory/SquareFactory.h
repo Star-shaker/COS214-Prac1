@@ -14,7 +14,6 @@ class SquareFactory : public ShapeFactory
 {
     public:
         SquareFactory();
-        Shape* createShape();
         virtual Shape* createShape(int l, int w, int x, int y, string colour);
 };
 

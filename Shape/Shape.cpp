@@ -14,3 +14,4 @@ std::vector<int> Shape::getCoords()
     std::vector<int> coords = {position_x, position_y};
     return coords;
 }
+

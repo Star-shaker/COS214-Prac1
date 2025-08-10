@@ -12,19 +12,19 @@ void Canvas::drawShape(string input)
     if (input == "Square")
     {
         ShapeFactory *squareFactory = new SquareFactory();
-        newShape = squareFactory->anOperation();
+        newShape = squareFactory->userInShape();
         delete squareFactory;
     }
     else if (input == "Rectangle")
     {
         ShapeFactory *rectangleFactory = new RectangleFactory();
-        newShape = rectangleFactory->anOperation();
+        newShape = rectangleFactory->userInShape();
         delete rectangleFactory;
     }
     else if (input == "Textbox")
     {
-        ShapeFactory *textboxFactory = new TextboxFactory();
-        newShape = textboxFactory->anOperation();
+        ShapeFactory *textboxFactory = new TextboxFactory("DEMO");
+        newShape = textboxFactory->userInShape();
         delete textboxFactory;
     }
 
@@ -39,15 +39,18 @@ void Canvas::drawShape(string input, int l, int w, int x, int y, string colour) 
     if (input == "Rectangle") {
         ShapeFactory* rectangleFact = new RectangleFactory();
         this->shapes.push_back(rectangleFact->createShape(l, w, x, y, colour));
+        delete rectangleFact;
     } else if (input == "Square") {
         ShapeFactory* squareFact = new SquareFactory();
         this->shapes.push_back(squareFact->createShape(l, w, x, y, colour));
+        delete squareFact;
     }
 }
 
 void Canvas::drawShape(int l, int w, int x, int y, string colour, string text) {
     ShapeFactory* tbFact = new TextboxFactory("Some Text");
     this->shapes.push_back(tbFact->createShape(l, w, x, y, colour));
+    delete tbFact;
 }
 
 string Canvas::listShapes()
@@ -58,9 +61,8 @@ string Canvas::listShapes()
         out = "There are no shapes yet\n";
     }
 
-    for (int i = 0; i < shapes.size(); i++)
-    {
-        out += shapes[i]->shapeType() + "\n";
+    for (Shape* shape : shapes) {
+        out += shape->shapeType() + "\n";
     }
 
     return out;
@@ -80,7 +82,7 @@ bool Canvas::cloneShape(int index)
     */
 
     if (this->shapes.empty() ||
-        index >= this->shapes.size() ||
+        std::size_t(index) >= this->shapes.size() ||
         index < 0)
     {
         return false;
@@ -98,8 +100,11 @@ void Canvas::clearCanvas() {
     Deallocates all Shape objects and empties vector
     */
 
-    for (int i = 0; i < this->shapes.size(); i++) {
-        delete this->shapes[i];
+    for (Shape* shape : shapes) {
+        if (shape != nullptr) {
+            delete shape;
+            shape = nullptr;
+        }
     }
 
     this->shapes.clear();
@@ -110,10 +115,15 @@ Memento* Canvas::captureCurrent() {
 }
 
 void Canvas::undoAction(Memento* memento) {
-    this->shapes.clear();
+    this->clearCanvas();
 
     vector<Shape*> memShapes = memento->getState();
-    for (int i = 0; i < memShapes.size(); i++) {
-        this->shapes.push_back(memShapes[i]->clone());
+    for (Shape* shape : memShapes) {
+        this->shapes.push_back(shape->clone());
     }
+    delete memento;
+}
+
+Canvas::~Canvas() {
+    clearCanvas();
 }

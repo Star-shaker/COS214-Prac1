@@ -12,8 +12,8 @@ class ShapeFactory
         Shape* shape;
 
     public:
-        Shape* anOperation();
-        virtual Shape* createShape() = 0;
+        virtual ~ShapeFactory() = default;
+        Shape* userInShape();
         virtual Shape* createShape(int l, int w, int x, int y, string colour) = 0;
 };
 

@@ -23,6 +23,7 @@ class Canvas
         
     public:
         Canvas();
+        ~Canvas();
         string listShapes();
         int getShapeCount();
         Memento* captureCurrent();

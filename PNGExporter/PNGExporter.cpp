@@ -14,3 +14,5 @@ void PNGExporter::saveToFile()
 {
     cout << "\033[1;33mPNG: Saved To file!\n\033[0m";
 }
+
+PNGExporter::~PNGExporter() {}
