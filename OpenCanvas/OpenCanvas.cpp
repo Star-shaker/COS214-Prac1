@@ -25,7 +25,6 @@ OpenCanvas::OpenCanvas(bool test)
             << "  \033[1;33m[l]\033[0m List shapes\n"
             << "  \033[1;33m[c]\033[0m Clone shape\n"
             << "  \033[1;33m[e]\033[0m Export canvas\n"
-            << "  \033[1;33m[v]\033[0m View canvasses\n"
             << "\033[1;95m======================\033[0m\n";
 
             string input = "";
@@ -157,39 +156,32 @@ void OpenCanvas::storeCanvasState(Canvas* canvas)
 
 void OpenCanvas::testCanvas()
 {
-    //----------Test shapes clone-----------------
-    UnitTester<bool> *boolTester = new UnitTester<bool>();
-    boolTester->newSection("Test shapes clone");
-    // Create testing canvas
-    Canvas *testingCanvas = new Canvas();
+    UnitTester<bool>* boolTester = new UnitTester<bool>();
 
-    // Test clone on empty canvas, should return false
+    // =================== CLONE SHAPE TESTS ===================
+    boolTester->newSection("Test shapes clone");
+    Canvas* testingCanvas = new Canvas();
+
     boolTester->test(testingCanvas->cloneShape(0), false);
 
-    // Test on Rectangle, assumes drawShape works
     testingCanvas->drawShape("Rectangle", 10, 10, 3, 4, "blue");
     boolTester->test(testingCanvas->cloneShape(0), true);
-    cout << testingCanvas->listShapes() << endl;
     string expectedOut = "0, Rectangle\n1, Rectangle\n";
     boolTester->test(testingCanvas->listShapes() == expectedOut, true);
     testingCanvas->clearCanvas();
 
-    // Test on square
     testingCanvas->drawShape("Square", 10, 10, 3, 4, "blue");
     boolTester->test(testingCanvas->cloneShape(0), true);
     expectedOut = "0, Square\n1, Square\n";
     boolTester->test(testingCanvas->listShapes() == expectedOut, true);
     testingCanvas->clearCanvas();
 
-    // Test on textbox
     testingCanvas->drawShape(10, 10, 3, 4, "blue", "SomeText");
     boolTester->test(testingCanvas->cloneShape(0), true);
     expectedOut = "0, Textbox\n1, Textbox\n";
     boolTester->test(testingCanvas->listShapes() == expectedOut, true);
     testingCanvas->clearCanvas();
-    boolTester->endSection();
 
-    // Test on all shapes
     testingCanvas->drawShape("Rectangle", 10, 10, 3, 4, "blue");
     testingCanvas->drawShape("Square", 10, 10, 3, 4, "blue");
     testingCanvas->drawShape(10, 10, 3, 4, "blue", "SomeText");
@@ -201,156 +193,122 @@ void OpenCanvas::testCanvas()
     expectedOut = "0, Rectangle\n1, Square\n2, Textbox\n3, Rectangle\n4, Square\n5, Textbox\n";
     boolTester->test(testingCanvas->listShapes() == expectedOut, true, "List shapes");
 
-    // Test out of bounds cloning
     boolTester->test(testingCanvas->cloneShape(6), false);
     boolTester->test(testingCanvas->cloneShape(-1), false);
-
     boolTester->endSection();
 
-    //---------------Test Memento----------------
+    // =================== MEMENTO TESTS ===================
     boolTester->newSection("Test memento");
     this->caretaker->storeMemento(testingCanvas->captureCurrent());
     testingCanvas->clearCanvas();
     testingCanvas->undoAction(this->caretaker->retrieveMemento());
     boolTester->test(testingCanvas->listShapes() == expectedOut, true, "List shapes memento");
 
-    // Test empty canvas
     testingCanvas->clearCanvas();
     this->caretaker->storeMemento(testingCanvas->captureCurrent());
     testingCanvas->undoAction(this->caretaker->retrieveMemento());
     expectedOut = "There are no shapes yet\n";
     boolTester->test(testingCanvas->listShapes() == expectedOut, true, "Mem empty canvas");
+
+    Caretaker* test = new Caretaker();
+    caretaker->retrieveMemento();
+    delete test;
     boolTester->endSection();
 
-    // ============= Factory Deep Coverage Tests =============
+    // =================== FACTORY TESTS ===================
     boolTester->newSection("Factory Deep Coverage");
-    
-    // Test RectangleFactory
+
     RectangleFactory rectFactory;
     Shape* rect = rectFactory.createShape(0, 0, 0, 0, "");
     rect->shapeType();
     boolTester->test(rect != nullptr, true, "RectangleFactory handles zero dimensions");
     delete rect;
-    
-    // Test SquareFactory
+
     SquareFactory squareFactory;
     Shape* square1 = squareFactory.createShape(0, 0, 0, 0, "");
     square1->shapeType();
     boolTester->test(square1 != nullptr, true, "SquareFactory handles zero size");
     delete square1;
-    
+
     Shape* square2 = squareFactory.createShape(-5, -5, 10, 0, "black");
     boolTester->test(square2 != nullptr, true, "SquareFactory handles negative coordinates");
     delete square2;
-    
-    // Test TextboxFactory(
+
     TextboxFactory* textboxFactory = new TextboxFactory("");
     Shape* textbox1 = textboxFactory->createShape(10, 10, 20, 30, "blue");
     textbox1->shapeType();
     boolTester->test(textbox1 != nullptr, true, "TextboxFactory with preset text");
     delete textbox1;
     delete textboxFactory;
-    
-    // Test factory reuse
+
     Shape* rect1 = rectFactory.createShape(1, 1, 2, 2, "test");
     Shape* rect2 = rectFactory.createShape(3, 3, 4, 4, "test");
     boolTester->test(rect1 != nullptr && rect2 != nullptr, true, "Factory reuse creates multiple shapes");
     delete rect1;
     delete rect2;
-    
-    // Test all factory constructors
-    {
-        RectangleFactory* dynamicRectFactory = new RectangleFactory();
-        SquareFactory* dynamicSquareFactory = new SquareFactory();
-        TextboxFactory* dynamicTextFactory2 = new TextboxFactory("Dynamic Text");
-        
-        Shape* dynRect = dynamicRectFactory->createShape(1, 1, 2, 2, "red");
-        Shape* dynSquare = dynamicSquareFactory->createShape(0, 0, 5, 0, "blue");
-        Shape* dynText2 = dynamicTextFactory2->createShape(5, 5, 15, 15, "purple");
-        
-        boolTester->test(dynRect != nullptr, true, "Dynamic RectangleFactory");
-        boolTester->test(dynSquare != nullptr, true, "Dynamic SquareFactory");
-        boolTester->test(dynText2 != nullptr, true, "Dynamic TextboxFactory parameterized");
-        
-        delete dynRect;
-        delete dynSquare;
-        delete dynText2;
-        delete dynamicRectFactory;
-        delete dynamicSquareFactory;
-        delete dynamicTextFactory2;
-    }
 
-    boolTester->endSection();  // End Factory Deep Coverage section
+    RectangleFactory* dynamicRectFactory = new RectangleFactory();
+    SquareFactory* dynamicSquareFactory = new SquareFactory();
+    TextboxFactory* dynamicTextFactory2 = new TextboxFactory("Dynamic Text");
 
+    Shape* dynRect = dynamicRectFactory->createShape(1, 1, 2, 2, "red");
+    Shape* dynSquare = dynamicSquareFactory->createShape(0, 0, 5, 0, "blue");
+    Shape* dynText2 = dynamicTextFactory2->createShape(5, 5, 15, 15, "purple");
+
+    boolTester->test(dynRect != nullptr, true, "Dynamic RectangleFactory");
+    boolTester->test(dynSquare != nullptr, true, "Dynamic SquareFactory");
+    boolTester->test(dynText2 != nullptr, true, "Dynamic TextboxFactory parameterized");
+
+    delete dynRect;
+    delete dynSquare;
+    delete dynText2;
+    delete dynamicRectFactory;
+    delete dynamicSquareFactory;
+    delete dynamicTextFactory2;
+
+    boolTester->endSection();
+
+    // =================== EXPORTER TESTS ===================
     boolTester->newSection("Test Exporters");
-
-    // Prepare a simple canvas to export
     Canvas* exportTestCanvas = new Canvas();
     exportTestCanvas->drawShape("Square", 0, 0, 10, 10, "red");
 
-    // createCanvas();
-    
-    // Test PDFExporter
     ExportCanvas* pdfExporter = new PDFExporter();
-    try {
-        pdfExporter->exportToFile(exportTestCanvas);
-        boolTester->test(true, true, "PDFExporter exportToFile runs without error");
-    } catch (...) {
-        boolTester->test(false, true, "PDFExporter exportToFile threw an exception");
-    }
+    pdfExporter->exportToFile(exportTestCanvas);
+    boolTester->test(true, true, "PDFExporter exportToFile runs without error");
     delete pdfExporter;
 
-    // Test PNGExporter
     ExportCanvas* pngExporter = new PNGExporter();
-    try {
-        pngExporter->exportToFile(exportTestCanvas);
-        boolTester->test(true, true, "PNGExporter exportToFile runs without error");
-    } catch (...) {
-        boolTester->test(false, true, "PNGExporter exportToFile threw an exception");
-    }
+    pngExporter->exportToFile(exportTestCanvas);
+    boolTester->test(true, true, "PNGExporter exportToFile runs without error");
     delete pngExporter;
 
     delete exportTestCanvas;
-
     boolTester->endSection();
 
+    // =================== CANVAS TESTS ===================
     boolTester->newSection("Additional Canvas Tests");
 
-    // Test getShapeCount consistency after adding shapes
     testingCanvas->clearCanvas();
     boolTester->test(testingCanvas->getShapeCount(), 0);
-
     testingCanvas->drawShape("Square", 5, 5, 0, 0, "red");
     boolTester->test(testingCanvas->getShapeCount(), 1);
-
     testingCanvas->drawShape("Rectangle", 10, 5, 1, 1, "blue");
     boolTester->test(testingCanvas->getShapeCount(), 2);
 
-    // Test drawShape(string) with invalid input (should ideally do nothing or error handling)
-    try {
-        testingCanvas->drawShape("Circle"); // Not implemented shape
-        boolTester->test(true, true, "drawShape with invalid shape string does not crash");
-    } catch (...) {
-        boolTester->test(false, true, "drawShape with invalid shape string throws");
-    }
+    testingCanvas->drawShape("Circle");
+    boolTester->test(true, true, "drawShape with invalid shape string does not crash");
 
-    // Test cloneShape with boundary indices
     boolTester->test(testingCanvas->cloneShape(-100), false);
     boolTester->test(testingCanvas->cloneShape(1000), false);
-    boolTester->test(testingCanvas->cloneShape(1), true); // Valid clone
+    boolTester->test(testingCanvas->cloneShape(1), true);
 
-    // Test clearCanvas empties the canvas
     testingCanvas->clearCanvas();
     boolTester->test(testingCanvas->getShapeCount(), 0);
     boolTester->test(testingCanvas->listShapes() == "There are no shapes yet\n", true, "clearCanvas empties the canvas");
-
-    Caretaker* test = new Caretaker();
-    caretaker->retrieveMemento();
-    delete test;
-    
     boolTester->endSection();
-    
-    // Mem management
+
+    // =================== CLEANUP ===================
     delete boolTester;
     delete testingCanvas;
 }
