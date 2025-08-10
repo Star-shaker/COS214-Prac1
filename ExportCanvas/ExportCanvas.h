@@ -3,7 +3,7 @@
 #ifndef ExportCanvas_H
 #define ExportCanvas_H
 
-#include "Canvas/Canvas.h"
+#include "../Canvas/Canvas.h"
 
 class ExportCanvas : public Canvas
 {

@@ -4,7 +4,7 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-#include "Shape/Shape.h"
+#include "../Shape/Shape.h"
 
 class Square: public Shape 
 {

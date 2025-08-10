@@ -3,8 +3,8 @@
 #ifndef RectangleFactory_H
 #define RectangleFactory_H
 
-#include "ShapeFactory/ShapeFactory.h"
-#include "Rectangle/Rectangle.h"
+#include "../ShapeFactory/ShapeFactory.h"
+#include "../Rectangle/Rectangle.h"
 
 #include <iostream>
 #include <string>

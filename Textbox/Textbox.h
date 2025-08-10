@@ -4,7 +4,7 @@
 #ifndef TEXTBOX_H
 #define TEXTBOX_H
 
-#include "Shape/Shape.h"
+#include "../Shape/Shape.h"
 
 class Textbox: public Shape 
 {
