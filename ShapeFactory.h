@@ -1,7 +1,7 @@
 #ifndef ShapeFactory_H
 #define ShapeFactory_H
 
-#include "../Shape/Shape.h"
+#include "Shape.h"
 #include <string>
 #include <iostream>
 using namespace std;

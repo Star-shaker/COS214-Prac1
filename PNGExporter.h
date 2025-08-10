@@ -3,7 +3,7 @@
 #ifndef PNGExporter_H
 #define PNGExporter_H
 
-#include "../ExportCanvas/ExportCanvas.h"
+#include "ExportCanvas.h"
 
 #include <iostream>
 using namespace std;

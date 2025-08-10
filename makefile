@@ -3,21 +3,21 @@ CXXFLAGS = -std=c++11 -g -Wall -I.
 LDFLAGS =
 
 SRC_COMMON = \
-      OpenCanvas/OpenCanvas.cpp \
-      Canvas/Canvas.cpp \
-      Shape/Shape.cpp \
-      Square/Square.cpp \
-      Rectangle/Rectangle.cpp \
-      Textbox/Textbox.cpp \
-      ShapeFactory/ShapeFactory.cpp \
-      SquareFactory/SquareFactory.cpp \
-      RectangleFactory/RectangleFactory.cpp \
-      TextboxFactory/TextboxFactory.cpp \
-      Memento/Memento.cpp \
-      Caretaker/Caretaker.cpp \
-	  ExportCanvas/ExportCanvas.cpp \
-	  PDFExporter/PDFExporter.cpp \
-	  PNGExporter/PNGExporter.cpp
+      OpenCanvas.cpp \
+      Canvas.cpp \
+      Shape.cpp \
+      Square.cpp \
+      Rectangle.cpp \
+      Textbox.cpp \
+      ShapeFactory.cpp \
+      SquareFactory.cpp \
+      RectangleFactory.cpp \
+      TextboxFactory.cpp \
+      Memento.cpp \
+      Caretaker.cpp \
+	  ExportCanvas.cpp \
+	  PDFExporter.cpp \
+	  PNGExporter.cpp
 
 OBJ_COMMON = $(SRC_COMMON:.cpp=.o)
 

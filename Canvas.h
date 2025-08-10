@@ -5,12 +5,12 @@
 #ifndef CANVAS_H
 #define CANVAS_H
 
-#include "../Shape/Shape.h"
-#include "../SquareFactory/SquareFactory.h"
-#include "../RectangleFactory/RectangleFactory.h"
-#include "../TextboxFactory/TextboxFactory.h"
+#include "Shape.h"
+#include "SquareFactory.h"
+#include "RectangleFactory.h"
+#include "TextboxFactory.h"
 
-#include "../Memento/Memento.h"
+#include "Memento.h"
 
 #include <string>
 using namespace std;

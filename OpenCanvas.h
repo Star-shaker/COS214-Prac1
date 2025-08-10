@@ -3,11 +3,11 @@
 #ifndef OpenCanvas_H
 #define OpenCanvas_H
 
-#include "../Canvas/Canvas.h"
-#include "../ExportCanvas/ExportCanvas.h"
-#include "../PDFExporter/PDFExporter.h"
-#include "../PNGExporter/PNGExporter.h"
-#include "../Caretaker/Caretaker.h"
+#include "Canvas.h"
+#include "ExportCanvas.h"
+#include "PDFExporter.h"
+#include "PNGExporter.h"
+#include "Caretaker.h"
 
 #include <list>
 #include <iostream>

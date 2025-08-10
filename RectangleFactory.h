@@ -1,19 +1,19 @@
 // ConcreteCreator (Factory Method)
 
-#ifndef SquareFactory_H
-#define SquareFactory_H
+#ifndef RectangleFactory_H
+#define RectangleFactory_H
 
-#include "../ShapeFactory/ShapeFactory.h"
-#include "../Square/Square.h"
+#include "ShapeFactory.h"
+#include "Rectangle.h"
 
 #include <iostream>
 #include <string>
 using namespace std;
 
-class SquareFactory : public ShapeFactory
+class RectangleFactory : public ShapeFactory
 {
     public:
-        SquareFactory();
+        RectangleFactory();
         virtual Shape* createShape(int l, int w, int x, int y, string colour);
 };
 
