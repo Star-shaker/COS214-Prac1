@@ -19,11 +19,12 @@ class Canvas
 {
     private:
         std::vector<Shape*> shapes;
+        int shapeCount;
         
     public:
-        // Canvas();
-        // ~Canvas();
+        Canvas();
         string listShapes();
+        int getShapeCount();
         Memento* captureCurrent();
         void undoAction(Memento*);
         void drawShape(string input);
@@ -33,7 +34,6 @@ class Canvas
         void drawShape(int l, int w, int x, int y, string colour, string text);
         bool cloneShape(int index);
         void clearCanvas();
-
 };
 
 #endif

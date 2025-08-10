@@ -1,17 +1,9 @@
 #include "Canvas.h"
 
-// Memento* Canvas::captureCurrent() {
-//     return new Memento(this->shapes);
-// }
-
-// void Canvas::undoAction(Memento* memento) {
-//     this->shapes = memento->getState();
-// }
-
-// Canvas::Canvas()
-// {
-
-// }
+Canvas::Canvas()
+{
+    shapeCount = 0;
+}
 
 void Canvas::drawShape(string input)
 {
@@ -20,25 +12,26 @@ void Canvas::drawShape(string input)
     if (input == "Square")
     {
         ShapeFactory *squareFactory = new SquareFactory();
-        newShape = squareFactory->createShape();
+        newShape = squareFactory->anOperation();
         delete squareFactory;
     }
     else if (input == "Rectangle")
     {
         ShapeFactory *rectangleFactory = new RectangleFactory();
-        newShape = rectangleFactory->createShape();
+        newShape = rectangleFactory->anOperation();
         delete rectangleFactory;
     }
     else if (input == "Textbox")
     {
         ShapeFactory *textboxFactory = new TextboxFactory();
-        newShape = textboxFactory->createShape();
+        newShape = textboxFactory->anOperation();
         delete textboxFactory;
     }
 
     if (newShape)
     {
         shapes.push_back(newShape);
+        shapeCount++;
     }
 }
 
@@ -67,11 +60,15 @@ string Canvas::listShapes()
 
     for (int i = 0; i < shapes.size(); i++)
     {
-        out += std::to_string(i) + ", " + shapes[i]->shapeType() + "\n";
+        out += shapes[i]->shapeType() + "\n";
     }
 
-    cout << out;
     return out;
+}
+
+int Canvas::getShapeCount()
+{
+    return shapeCount;
 }
 
 bool Canvas::cloneShape(int index)

@@ -15,7 +15,6 @@ class ExportCanvas : public Canvas
         virtual void saveToFile() = 0;
     
     public:
-        virtual ~ExportCanvas();
         void exportToFile(Canvas* canvas); //Template method
 };
 

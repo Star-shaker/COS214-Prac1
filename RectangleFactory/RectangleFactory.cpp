@@ -12,7 +12,7 @@ Shape* RectangleFactory::createShape()
     int l;
     while (!l_valid)
     {
-        cout << "Enter the length: ";
+        cout << "\033[1;92mEnter the length: \033[0m";
         cin >> input_l;
 
         try
@@ -22,7 +22,7 @@ Shape* RectangleFactory::createShape()
         }
         catch(const exception& e)
         {
-            cout << "Not a valid integer. Please try again." << endl;
+            cout << "\033[1;31mNot a valid integer. Please try again.\033[0m" << endl;
         }
     }
 
@@ -31,7 +31,7 @@ Shape* RectangleFactory::createShape()
     int w;
     while (!w_valid)
     {
-        cout << "Enter the width: ";
+        cout << "\033[1;92mEnter the width: \033[0m";
         cin >> input_w;
 
         try
@@ -41,7 +41,7 @@ Shape* RectangleFactory::createShape()
         }
         catch(const exception& e)
         {
-            cout << "Not a valid integer. Please try again." << endl;
+            cout << "\033[1;31mNot a valid integer. Please try again.\033[0m" << endl;
         }
     }
 
@@ -50,7 +50,7 @@ Shape* RectangleFactory::createShape()
     int x;
     while (!x_valid)
     {
-        cout << "Enter the x-coordinate: ";
+        cout << "\033[1;92mEnter the x-coordinate: \033[0m";
         cin >> input_x;
 
         try
@@ -60,7 +60,7 @@ Shape* RectangleFactory::createShape()
         }
         catch(const exception& e)
         {
-            cout << "Not a valid integer. Please try again." << endl;
+            cout << "\033[1;31mNot a valid integer. Please try again.\033[0m" << endl;
         }
     }
     
@@ -69,7 +69,7 @@ Shape* RectangleFactory::createShape()
     int y;
     while (!y_valid)
     {
-        cout << "Enter the y-coordinate: ";
+        cout << "\033[1;92mEnter the y-coordinate: \033[0m";
         cin >> input_y;
 
         try
@@ -79,7 +79,7 @@ Shape* RectangleFactory::createShape()
         }
         catch(const exception& e)
         {
-            cout << "Not a valid integer. Please try again." << endl;
+            cout << "\033[1;31mNot a valid integer. Please try again.\033[0m" << endl;
         }
     }
 
@@ -87,7 +87,7 @@ Shape* RectangleFactory::createShape()
     bool colour_valid = false;
     while (!colour_valid)
     {
-        cout << "Enter the colour: ";
+        cout << "\033[1;92mEnter the colour: \033[0m";
         cin >> input_colour;
 
         colour_valid = true;
@@ -108,25 +108,16 @@ Shape* RectangleFactory::createShape()
 
         if (colour_valid == false)
         {
-            cout << "Not a valid colour. Please try again." << endl;
+            cout << "\033[1;31mNot a valid colour. Please try again.\033[0m" << endl;
         }
     }
 
     Shape* newRectangle = new Rectangle(x, y, l, w, input_colour);
-    cout << "Shape created: " << newRectangle->shapeType() << endl;
+    cout << "\033[1;33mShape created:\033[0m " << newRectangle->shapeType() << endl;
     return newRectangle;
 }
 
-Shape* RectangleFactory::createShape(int l, int w, int x, int y, string colour) {
+Shape* RectangleFactory::createShape(int l, int w, int x, int y, string colour) 
+{
     return new Rectangle(x, y, l, w, colour);
-}
-
-void RectangleFactory::toString()
-{
-    cout << "Rectangle created!" << endl;
-}
-
-RectangleFactory::~RectangleFactory()
-{
-    // TODO: Memory management!
 }

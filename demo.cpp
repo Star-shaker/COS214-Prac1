@@ -1,6 +1,6 @@
 #include "OpenCanvas/OpenCanvas.h"
 
-#define TEST true
+#define TEST false
 
 int main()
 {
