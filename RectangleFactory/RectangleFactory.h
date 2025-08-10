@@ -14,7 +14,6 @@ class RectangleFactory : public ShapeFactory
 {
     public:
         RectangleFactory();
-        virtual Shape* createShape();
         virtual Shape* createShape(int l, int w, int x, int y, string colour);
 };
 

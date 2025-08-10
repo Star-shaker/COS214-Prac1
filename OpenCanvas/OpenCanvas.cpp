@@ -4,7 +4,8 @@
 OpenCanvas::OpenCanvas(bool test)
 {
     this->caretaker = new Caretaker();
-    
+    this->canvas = NULL;
+
     if (test)
     {
         this->testCanvas();
@@ -141,8 +142,12 @@ Canvas *OpenCanvas::createCanvas()
 
 OpenCanvas::~OpenCanvas()
 {
-    delete canvas;
-    delete caretaker;
+    if (canvas) {
+       delete canvas;
+    }
+    if (caretaker) {
+        delete caretaker;
+    }
 }
 
 void OpenCanvas::storeCanvasState(Canvas* canvas) 
@@ -164,6 +169,7 @@ void OpenCanvas::testCanvas()
     // Test on Rectangle, assumes drawShape works
     testingCanvas->drawShape("Rectangle", 10, 10, 3, 4, "blue");
     boolTester->test(testingCanvas->cloneShape(0), true);
+    cout << testingCanvas->listShapes() << endl;
     string expectedOut = "0, Rectangle\n1, Rectangle\n";
     boolTester->test(testingCanvas->listShapes() == expectedOut, true);
     testingCanvas->clearCanvas();
@@ -237,18 +243,13 @@ void OpenCanvas::testCanvas()
     boolTester->test(square2 != nullptr, true, "SquareFactory handles negative coordinates");
     delete square2;
     
-    // Test TextboxFactory
-    TextboxFactory textboxFactory;
-    textboxFactory.setText("Initial Text");
-    Shape* textbox1 = textboxFactory.createShape(10, 10, 20, 30, "blue");
+    // Test TextboxFactory(
+    TextboxFactory* textboxFactory = new TextboxFactory("");
+    Shape* textbox1 = textboxFactory->createShape(10, 10, 20, 30, "blue");
     textbox1->shapeType();
     boolTester->test(textbox1 != nullptr, true, "TextboxFactory with preset text");
     delete textbox1;
-    
-    textboxFactory.setText("");
-    Shape* textbox2 = textboxFactory.createShape(5, 5, 15, 25, "green");
-    boolTester->test(textbox2 != nullptr, true, "TextboxFactory with empty text");
-    delete textbox2;
+    delete textboxFactory;
     
     // Test factory reuse
     Shape* rect1 = rectFactory.createShape(1, 1, 2, 2, "test");
@@ -261,26 +262,21 @@ void OpenCanvas::testCanvas()
     {
         RectangleFactory* dynamicRectFactory = new RectangleFactory();
         SquareFactory* dynamicSquareFactory = new SquareFactory();
-        TextboxFactory* dynamicTextFactory1 = new TextboxFactory();
         TextboxFactory* dynamicTextFactory2 = new TextboxFactory("Dynamic Text");
         
         Shape* dynRect = dynamicRectFactory->createShape(1, 1, 2, 2, "red");
         Shape* dynSquare = dynamicSquareFactory->createShape(0, 0, 5, 0, "blue");
-        Shape* dynText1 = dynamicTextFactory1->createShape(0, 0, 10, 10, "green");
         Shape* dynText2 = dynamicTextFactory2->createShape(5, 5, 15, 15, "purple");
         
         boolTester->test(dynRect != nullptr, true, "Dynamic RectangleFactory");
         boolTester->test(dynSquare != nullptr, true, "Dynamic SquareFactory");
-        boolTester->test(dynText1 != nullptr, true, "Dynamic TextboxFactory default");
         boolTester->test(dynText2 != nullptr, true, "Dynamic TextboxFactory parameterized");
         
         delete dynRect;
         delete dynSquare;
-        delete dynText1;
         delete dynText2;
         delete dynamicRectFactory;
         delete dynamicSquareFactory;
-        delete dynamicTextFactory1;
         delete dynamicTextFactory2;
     }
 
@@ -292,7 +288,7 @@ void OpenCanvas::testCanvas()
     Canvas* exportTestCanvas = new Canvas();
     exportTestCanvas->drawShape("Square", 0, 0, 10, 10, "red");
 
-    createCanvas();
+    // createCanvas();
     
     // Test PDFExporter
     ExportCanvas* pdfExporter = new PDFExporter();

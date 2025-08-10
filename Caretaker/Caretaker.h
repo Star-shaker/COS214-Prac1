@@ -11,6 +11,7 @@ class Caretaker
         std::list<Memento*> canvasses;
         
     public:
+        ~Caretaker();
         void storeMemento(Memento*);
         Memento* retrieveMemento(); 
 };

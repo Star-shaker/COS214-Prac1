@@ -21,6 +21,7 @@ class Shape
         virtual std::string shapeType() = 0;
         virtual Shape* clone() = 0;
         std::vector<int> getCoords();
+        virtual ~Shape() = default;
 };
 
 #endif 

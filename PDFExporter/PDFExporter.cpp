@@ -14,3 +14,5 @@ void PDFExporter::saveToFile()
 {
     cout << "\033[1;33mPDF: Saved to file!\n\033[0m";
 }
+
+PDFExporter::~PDFExporter() {}

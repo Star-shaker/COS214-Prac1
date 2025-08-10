@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -g -Wall -I.
+CXXFLAGS = -std=c++11 -g -Wall -I.
 LDFLAGS =
 
 SRC_COMMON = \

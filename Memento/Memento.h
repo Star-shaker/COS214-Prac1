@@ -10,6 +10,7 @@ class Memento
         std::vector<Shape*> shapes;
         
     public:
+        ~Memento();
         Memento(std::vector<Shape*>& elements);
         std::vector<Shape*> getState();
 };

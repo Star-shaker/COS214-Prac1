@@ -14,6 +14,8 @@ class PDFExporter : public ExportCanvas
         void saveToFile();
         void prepareCanvas();
         void renderElements();
+    public:
+        virtual ~PDFExporter();
 };
 
 #endif
