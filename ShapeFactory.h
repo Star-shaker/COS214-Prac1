@@ -8,9 +8,6 @@ using namespace std;
 
 class ShapeFactory
 {
-    private:
-        Shape* shape;
-
     public:
         virtual ~ShapeFactory() = default;
         Shape* userInShape();
