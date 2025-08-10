@@ -24,9 +24,9 @@ OBJ_COMMON = $(SRC_COMMON:.cpp=.o)
 TARGET_TEST = canvas_test
 TARGET_DEMO = canvas_demo
 
-all: test
+all: run
 
-test: $(TARGET_TEST)
+run: $(TARGET_TEST)
 	./$(TARGET_TEST)
 
 $(TARGET_TEST): main.cpp $(OBJ_COMMON)
