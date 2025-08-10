@@ -1,4 +1,4 @@
-#include "./OpenCanvas/OpenCanvas.h"
+#include "OpenCanvas.h"
 
 #define TEST true
 

@@ -3,7 +3,7 @@
 #ifndef PDFExporter_H
 #define PDFExporter_H
 
-#include "../ExportCanvas/ExportCanvas.h"
+#include "ExportCanvas.h"
 
 #include <iostream>
 using namespace std;

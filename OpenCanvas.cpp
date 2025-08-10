@@ -1,5 +1,5 @@
 #include "OpenCanvas.h"
-#include "../UnitTester.h"
+#include "UnitTester.h"
 
 OpenCanvas::OpenCanvas(bool test)
 {
