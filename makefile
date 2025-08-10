@@ -29,14 +29,14 @@ all: run
 run: $(TARGET_TEST)
 	./$(TARGET_TEST)
 
-$(TARGET_TEST): main.cpp $(OBJ_COMMON)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ main.cpp $(OBJ_COMMON)
+$(TARGET_TEST): TestingMain.cpp $(OBJ_COMMON)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ TestingMain.cpp $(OBJ_COMMON)
 
 demo: $(TARGET_DEMO)
 	./$(TARGET_DEMO)
 
-$(TARGET_DEMO): demo.cpp $(OBJ_COMMON)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ demo.cpp $(OBJ_COMMON)
+$(TARGET_DEMO): DemoMain.cpp $(OBJ_COMMON)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ DemoMain.cpp $(OBJ_COMMON)
 
 clean:
 	rm -f $(OBJ_COMMON) $(TARGET_TEST) $(TARGET_DEMO)
