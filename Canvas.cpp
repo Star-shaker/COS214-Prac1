@@ -38,11 +38,11 @@ void Canvas::drawShape(string input)
 void Canvas::drawShape(string input, int l, int w, int x, int y, string colour) {
     if (input == "Rectangle") {
         ShapeFactory* rectangleFact = new RectangleFactory();
-        this->shapes.push_back(rectangleFact->createShape(l, w, x, y, colour));
+        this->shapes.push_back(rectangleFact->newShape(l, w, x, y, colour));
         delete rectangleFact;
     } else if (input == "Square") {
         ShapeFactory* squareFact = new SquareFactory();
-        this->shapes.push_back(squareFact->createShape(l, w, x, y, colour));
+        this->shapes.push_back(squareFact->newShape(l, w, x, y, colour));
         delete squareFact;
     }
     shapeCount++;
@@ -50,7 +50,7 @@ void Canvas::drawShape(string input, int l, int w, int x, int y, string colour) 
 
 void Canvas::drawShape(int l, int w, int x, int y, string colour, string text) {
     ShapeFactory* tbFact = new TextboxFactory("Some Text");
-    this->shapes.push_back(tbFact->createShape(l, w, x, y, colour));
+    this->shapes.push_back(tbFact->newShape(l, w, x, y, colour));
     delete tbFact;
     shapeCount++;
 }

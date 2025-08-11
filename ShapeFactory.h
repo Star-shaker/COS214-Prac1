@@ -15,6 +15,7 @@ class ShapeFactory
     public:
         virtual ~ShapeFactory() = default;
         Shape* userInShape();
+	Shape* newShape(int l, int w, int x, int y, string colour);
 };
 
 #endif

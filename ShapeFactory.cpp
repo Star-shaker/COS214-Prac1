@@ -111,3 +111,7 @@ Shape* ShapeFactory::userInShape()
     cout << "\033[1;33mShape created:\033[0m " << newShape->shapeType() << endl;
     return newShape;  
 }
+
+Shape* ShapeFactory::newShape(int w, int l, int x, int y, string colour) {
+	return createShape(w, l, x, y, colour);
+}
