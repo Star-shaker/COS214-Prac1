@@ -35,20 +35,26 @@ void Canvas::drawShape(string input)
     }
 }
 
-void Canvas::drawShape(string input, int l, int w, int x, int y, string colour) {
-    if (input == "Rectangle") {
+void Canvas::drawShape(string input, int l, int w, int x, int y, string colour) 
+{
+    if (input == "Rectangle") 
+    {
         ShapeFactory* rectangleFact = new RectangleFactory();
         this->shapes.push_back(rectangleFact->newShape(l, w, x, y, colour));
         delete rectangleFact;
-    } else if (input == "Square") {
+    } 
+    else if (input == "Square") 
+    {
         ShapeFactory* squareFact = new SquareFactory();
         this->shapes.push_back(squareFact->newShape(l, w, x, y, colour));
         delete squareFact;
     }
+
     shapeCount++;
 }
 
-void Canvas::drawShape(int l, int w, int x, int y, string colour, string text) {
+void Canvas::drawShape(int l, int w, int x, int y, string colour, string text) 
+{
     ShapeFactory* tbFact = new TextboxFactory("Some Text");
     this->shapes.push_back(tbFact->newShape(l, w, x, y, colour));
     delete tbFact;
@@ -63,8 +69,11 @@ string Canvas::listShapes()
         out = "There are no shapes yet\n";
     }
 
-    for (Shape* shape : shapes) {
-        out += shape->shapeType() + "\n";
+    int id = 0;
+    
+    for (Shape* shape : shapes) 
+    {
+        out += to_string(id++) + ", " + shape->shapeType() + ": " + shape->getAttributes() + " " + shape->getCoords() + "\n";
     }
 
     return out;
@@ -97,35 +106,43 @@ bool Canvas::cloneShape(int index)
     return true;
 }
 
-void Canvas::clearCanvas() {
+void Canvas::clearCanvas() 
+{
     /*
     Deallocates all Shape objects and empties vector
     */
 
-    for (Shape* shape : shapes) {
-        if (shape != nullptr) {
+    for (Shape* shape : shapes) 
+    {
+        if (shape != nullptr) 
+        {
             delete shape;
             shape = nullptr;
         }
     }
 
+    shapeCount = 0;
     this->shapes.clear();
 }
 
-Memento* Canvas::captureCurrent() {
+Memento* Canvas::captureCurrent() 
+{
     return new Memento(this->shapes);
 }
 
-void Canvas::undoAction(Memento* memento) {
+void Canvas::undoAction(Memento* memento) 
+{
     this->clearCanvas();
 
     vector<Shape*> memShapes = memento->getState();
-    for (Shape* shape : memShapes) {
+    for (Shape* shape : memShapes) 
+    {
         this->shapes.push_back(shape->clone());
     }
     delete memento;
 }
 
-Canvas::~Canvas() {
+Canvas::~Canvas() 
+{
     clearCanvas();
 }

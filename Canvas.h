@@ -28,13 +28,13 @@ class Canvas
         int getShapeCount();
         Memento* captureCurrent();
         void undoAction(Memento*);
+        bool cloneShape(int index);
+        void clearCanvas();
         void drawShape(string input);
 
         // Overload drawShape to allow for passing parameters
         void drawShape(string input, int l, int w, int x, int y, string colour);
         void drawShape(int l, int w, int x, int y, string colour, string text);
-        bool cloneShape(int index);
-        void clearCanvas();
 };
 
 #endif

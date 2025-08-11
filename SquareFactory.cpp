@@ -1,8 +1,6 @@
 #include "SquareFactory.h"
 
-SquareFactory::SquareFactory() : ShapeFactory()
-{
-}
+SquareFactory::SquareFactory() : ShapeFactory() {}
 
 string SquareFactory::toString()
 {

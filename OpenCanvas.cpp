@@ -36,7 +36,6 @@ OpenCanvas::OpenCanvas(bool test)
                 break;
             }
 
-            // TODO: Input validation
             if (input == "a")
             {
                 cout << "  1. Square\n" << "  2. Rectangle\n" << "  3. Textbox\n\033[0m" << "\n\033[1;96mSelect the shape you want to draw: \033[0m";
@@ -66,9 +65,12 @@ OpenCanvas::OpenCanvas(bool test)
             if (input == "u") 
             {
                 Memento* prevMem = this->caretaker->retrieveMemento();
-                if (prevMem == NULL) {
+                if (prevMem == NULL) 
+                {
                     cout << "\033[1;31mNo actions to undo\n\033[0m";
-                } else {
+                } 
+                else 
+                {
                     canvas->undoAction(prevMem);
                     cout << "\033[1;91mAction undid successfully.\nUpdated Shape list:\n\033[0m";
                     cout << canvas->listShapes();
@@ -84,10 +86,13 @@ OpenCanvas::OpenCanvas(bool test)
                 cin >> cloneNumString;
                 int cloneNum = stoi(cloneNumString);
 
-                if (canvas->cloneShape(cloneNum)) {
+                if (canvas->cloneShape(cloneNum)) 
+                {
                     cout << "\033[1;33mSuccesfully cloned shape.\nUpdated shapes list:\033[0m\n";
                     cout << canvas->listShapes();
-                } else {
+                } 
+                else 
+                {
                     cout << "\033[1;31mFailed to clone shape. Please make sure that you entered a valid index.\033[0m\n";
                 }
             }

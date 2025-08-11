@@ -1,9 +1,6 @@
 #include "TextboxFactory.h"
 
-TextboxFactory::TextboxFactory(string text) : ShapeFactory(), text(text)
-{
-    cout << "TextboxFactory created!\n";
-}
+TextboxFactory::TextboxFactory(string text) : ShapeFactory(), text(text) {}
 
 string TextboxFactory::toString()
 {

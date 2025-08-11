@@ -1,8 +1,11 @@
 #include "Memento.h"
 
-Memento::~Memento() { 
-    for (Shape* shape : shapes) {
-        if (shape != nullptr) {
+Memento::~Memento() 
+{ 
+    for (Shape* shape : shapes)
+    {
+        if (shape != nullptr) 
+        {
             delete shape;
             shape = nullptr;
         }
@@ -11,7 +14,8 @@ Memento::~Memento() {
 
 Memento::Memento(std::vector<Shape*>& elements) 
 {
-    for (Shape* shape : elements) {
+    for (Shape* shape : elements) 
+    {
         this->shapes.push_back(shape->clone());
     }
 }

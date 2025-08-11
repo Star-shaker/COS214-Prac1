@@ -1,9 +1,6 @@
 #include "RectangleFactory.h"
 
-RectangleFactory::RectangleFactory() : ShapeFactory()
-{
-
-}
+RectangleFactory::RectangleFactory() : ShapeFactory() {}
 
 string RectangleFactory::toString()
 {
