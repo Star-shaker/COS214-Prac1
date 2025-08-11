@@ -7,9 +7,11 @@
 #include <string> 
 #include <vector>
 
+using namespace std;
+
 class Shape 
 {
-    private:
+    protected:
         int length;
         int width;
         std::string colour;
@@ -20,7 +22,8 @@ class Shape
         Shape(int x, int y, int l, int w, std::string);
         virtual std::string shapeType() = 0;
         virtual Shape* clone() = 0;
-        std::vector<int> getCoords();
+        string getCoords();
+        virtual string getAttributes() = 0;
         virtual ~Shape() = default;
 };
 

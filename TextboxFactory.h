@@ -14,10 +14,12 @@ class TextboxFactory : public ShapeFactory
 {
     private:
         string text;
+        
     public:
         TextboxFactory(string text);
         virtual Shape* createShape(int l, int w, int x, int y, string colour);
         void setText(string text);
+        string toString();
 };
 
 #endif

@@ -11,14 +11,18 @@ Memento* Caretaker::retrieveMemento()
     {
         return NULL;
     }
+
     Memento* out = this->canvasses.front();
     this->canvasses.pop_front();
     return out;
 }
 
-Caretaker::~Caretaker() {
-    for (Memento* m : canvasses) {
-        if (m != nullptr) {
+Caretaker::~Caretaker() 
+{
+    for (Memento* m : canvasses) 
+    {
+        if (m != nullptr) 
+        {
             delete m;
             m = nullptr;
         }

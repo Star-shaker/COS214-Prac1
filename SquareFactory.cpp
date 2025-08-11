@@ -1,8 +1,10 @@
 #include "SquareFactory.h"
 
-SquareFactory::SquareFactory() : ShapeFactory()
+SquareFactory::SquareFactory() : ShapeFactory() {}
+
+string SquareFactory::toString()
 {
-    cout << "SquareFactory created!\n";
+    return "SquareFactory created!\n";
 }
 
 Shape* SquareFactory::createShape(int l, int w, int x, int y, string colour) 

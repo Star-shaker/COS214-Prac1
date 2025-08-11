@@ -1,8 +1,10 @@
 #include "TextboxFactory.h"
 
-TextboxFactory::TextboxFactory(string text) : ShapeFactory(), text(text)
+TextboxFactory::TextboxFactory(string text) : ShapeFactory(), text(text) {}
+
+string TextboxFactory::toString()
 {
-    cout << "TextboxFactory created!\n";
+    return "TextboxFactory created!\n";
 }
 
 Shape *TextboxFactory::createShape(int l, int w, int x, int y, string colour)

@@ -1,8 +1,10 @@
 #include "RectangleFactory.h"
 
-RectangleFactory::RectangleFactory() : ShapeFactory()
+RectangleFactory::RectangleFactory() : ShapeFactory() {}
+
+string RectangleFactory::toString()
 {
-    cout << "RectangleFactory created!\n";
+    return "RectangleFactory created!\n";
 }
 
 Shape* RectangleFactory::createShape(int l, int w, int x, int y, string colour) 
