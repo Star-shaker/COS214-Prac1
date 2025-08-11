@@ -45,12 +45,14 @@ void Canvas::drawShape(string input, int l, int w, int x, int y, string colour) 
         this->shapes.push_back(squareFact->createShape(l, w, x, y, colour));
         delete squareFact;
     }
+    shapeCount++;
 }
 
 void Canvas::drawShape(int l, int w, int x, int y, string colour, string text) {
     ShapeFactory* tbFact = new TextboxFactory("Some Text");
     this->shapes.push_back(tbFact->createShape(l, w, x, y, colour));
     delete tbFact;
+    shapeCount++;
 }
 
 string Canvas::listShapes()

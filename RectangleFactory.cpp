@@ -2,7 +2,12 @@
 
 RectangleFactory::RectangleFactory() : ShapeFactory()
 {
-    cout << "RectangleFactory created!\n";
+
+}
+
+string RectangleFactory::toString()
+{
+    return "RectangleFactory created!\n";
 }
 
 Shape* RectangleFactory::createShape(int l, int w, int x, int y, string colour) 

@@ -60,7 +60,7 @@ OpenCanvas::OpenCanvas(bool test)
 
             if (input == "l") 
             {
-                canvas->listShapes();
+                cout << canvas->listShapes();
             }
 
             if (input == "u") 
@@ -71,7 +71,7 @@ OpenCanvas::OpenCanvas(bool test)
                 } else {
                     canvas->undoAction(prevMem);
                     cout << "\033[1;91mAction undid successfully.\nUpdated Shape list:\n\033[0m";
-                    canvas->listShapes();
+                    cout << canvas->listShapes();
                 }
             }
 
@@ -79,14 +79,14 @@ OpenCanvas::OpenCanvas(bool test)
             {
                 this->storeCanvasState(canvas);
                 cout << "\033[1;96mSelect the number of the shape to clone:\033[0m\n";
-                canvas->listShapes();
+                cout << canvas->listShapes();
                 string cloneNumString;
                 cin >> cloneNumString;
                 int cloneNum = stoi(cloneNumString);
 
                 if (canvas->cloneShape(cloneNum)) {
                     cout << "\033[1;33mSuccesfully cloned shape.\nUpdated shapes list:\033[0m\n";
-                    canvas->listShapes();
+                    cout << canvas->listShapes();
                 } else {
                     cout << "\033[1;31mFailed to clone shape. Please make sure that you entered a valid index.\033[0m\n";
                 }

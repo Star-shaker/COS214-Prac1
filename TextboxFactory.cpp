@@ -5,6 +5,11 @@ TextboxFactory::TextboxFactory(string text) : ShapeFactory(), text(text)
     cout << "TextboxFactory created!\n";
 }
 
+string TextboxFactory::toString()
+{
+    return "TextboxFactory created!\n";
+}
+
 Shape *TextboxFactory::createShape(int l, int w, int x, int y, string colour)
 {
     if (this->text == "")

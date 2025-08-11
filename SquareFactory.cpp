@@ -2,7 +2,11 @@
 
 SquareFactory::SquareFactory() : ShapeFactory()
 {
-    cout << "SquareFactory created!\n";
+}
+
+string SquareFactory::toString()
+{
+    return "SquareFactory created!\n";
 }
 
 Shape* SquareFactory::createShape(int l, int w, int x, int y, string colour) 
