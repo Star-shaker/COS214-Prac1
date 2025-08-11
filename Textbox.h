@@ -9,6 +9,10 @@
 class Textbox: public Shape 
 {
     private:
+	int length;
+	int width;
+	int position_x;
+	int position_y;
         std::string text;
         
     public:

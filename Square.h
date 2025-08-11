@@ -8,6 +8,12 @@
 
 class Square: public Shape 
 {
+    private:
+	int length;
+	int width;
+	string colour;
+	int position_x;
+	int position_y;
     public:
         Square(int x, int y, int side, std::string colour);
         virtual Shape* clone();

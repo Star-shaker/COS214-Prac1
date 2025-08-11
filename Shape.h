@@ -7,9 +7,11 @@
 #include <string> 
 #include <vector>
 
+using namespace std;
+
 class Shape 
 {
-    private:
+    protected:
         int length;
         int width;
         std::string colour;
